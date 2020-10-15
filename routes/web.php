@@ -21,3 +21,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/accountbook', 'AccountbookController@index');
+Route::get('accountbook/create', 'AccountbookController@add');
+Route::post('accountbook/create', 'AccountbookController@create');
