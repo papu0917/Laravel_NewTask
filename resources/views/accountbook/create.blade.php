@@ -24,7 +24,7 @@
                 <div class="form-group row">
                     <label class="col-md-2">金額</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" name="body" rows="20">{{ old('price') }}</textarea>
+                        <input type="text" class="form-control" name="price" value="{{ old('price') }}">
                     </div>
                 </div>
                 {{ csrf_field() }}
