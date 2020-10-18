@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         </h2>購入品一覧</h2>
-        <p>合計金額: {{ $totalPrice }}</p>
+        <p>合計金額: {{ $totalPrice }} 円</p>
     </div>
     <div class="row">
         <div class="list-news col-md-12 mx-auto">
@@ -23,7 +23,12 @@
                             <tr>
                                 <th>{{ $accountbook->id }}</th>
                                 <td>{{ \Str::limit($accountbook->title, 100) }}</td>
-                                <td>{{ $accountbook->price }}</td>
+                                <td>{{ $accountbook->price }} 円</td>
+                                <td>
+                                    <div><a
+                                            href="{{ action('AccountbookController@delete', ['id' => $accountbook->id]) }}">削除</a>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
