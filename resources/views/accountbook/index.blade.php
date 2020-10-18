@@ -5,6 +5,7 @@
 <div class="container">
     <div class="row">
         </h2>購入品一覧</h2>
+        <p>合計金額: {{ $totalPrice }}</p>
     </div>
     <div class="row">
         <div class="list-news col-md-12 mx-auto">

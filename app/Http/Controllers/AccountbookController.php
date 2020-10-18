@@ -11,8 +11,9 @@ class AccountbookController extends Controller
     public function index(Request $request)
     {
         $accountbooks = Accountbook::all();
+        $totalPrice = Accountbook::sum("price");
 
-        return view('accountbook.index', compact('accountbooks')); // resource/views/accountbook/index.blade.phpを表示する
+        return view('accountbook.index', compact('accountbooks', 'totalPrice')); // resource/views/accountbook/index.blade.phpを表示する
     }
 
     public function add()
