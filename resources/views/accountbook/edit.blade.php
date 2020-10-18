@@ -33,6 +33,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-md-2">カテゴリ</label>
+                        <div class="col-md-10">
+                            <select name="category_id">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <div class="col-md-10">
                             <input type="hidden" name="id" value="{{ $accountbook->id }}">
                             {{ csrf_field() }}

@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Accountbook extends Model
 {
     protected $fillable = [   // <---　追加
-        'user_id', 'title', 'price', 'id', 'purchase_date',
+        'user_id', 'title', 'price', 'id', 'purchase_date', 'category_id',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
 }

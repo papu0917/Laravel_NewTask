@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Accountbook;
+use App\Category;
 use Carbon\Carbon;
 use Auth;
 
@@ -14,12 +15,22 @@ class AccountbookController extends Controller
         $accountbooks = Accountbook::all();
         $totalPrice = Accountbook::sum("price");
 
-        return view('accountbook.index', compact('accountbooks', 'totalPrice')); // resource/views/accountbook/index.blade.phpを表示する
+        $cond_name = $request->cond_name;
+        if ($cond_name != '') {
+            $accountbooks->whereHas('category', function ($query) use ($cond_name) {
+                $query->where('name', $cond_name);
+            });
+        }
+
+
+        return view('accountbook.index', ['accountbooks' => $accountbooks, 'totalPrice' => $totalPrice, 'cond_name' => $cond_name]);
     }
 
     public function add()
     {
-        return view('accountbook.create');
+        $categories = Category::all();
+
+        return view('accountbook.create', compact('categories'));
     }
 
     public function create(Request $request)
@@ -37,8 +48,9 @@ class AccountbookController extends Controller
     public function edit(Request $request)
     {
         $accountbook = Accountbook::find($request->id);
+        $categories = Category::all();
 
-        return view('accountbook.edit', compact('accountbook'));
+        return view('accountbook.edit', compact('accountbook', 'categories'));
     }
 
     public function update(Request $request)

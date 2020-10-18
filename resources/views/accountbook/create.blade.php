@@ -31,6 +31,16 @@
                             <input type="text" class="form-control" name="price" value="{{ old('price') }}">
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-md-2">カテゴリ</label>
+                        <div class="col-md-10">
+                            <select name="category_id">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     {{ csrf_field() }}
                     <input type="submit" class="btn btn-primary" value="登録">
                 </form>

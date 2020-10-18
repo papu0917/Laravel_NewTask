@@ -26,3 +26,10 @@ Route::post('accountbook/create', 'AccountbookController@create');
 Route::get('accountbook/delete', 'AccountbookController@delete');
 Route::get('accountbook/edit', 'AccountbookController@edit');
 Route::post('accountbook/edit', 'AccountbookController@update');
+
+Route::get('category/create', 'CategoryController@add');
+Route::post('category/create', 'CategoryController@create');
+Route::get('category', 'CategoryController@index');
+Route::get('category/edit', 'CategoryController@edit');
+Route::post('category/edit', 'CategoryController@update');
+Route::get('category/delete', 'CategoryController@delete');
