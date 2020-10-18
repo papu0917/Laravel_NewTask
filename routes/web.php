@@ -24,3 +24,5 @@ Route::get('/accountbook', 'AccountbookController@index');
 Route::get('accountbook/create', 'AccountbookController@add');
 Route::post('accountbook/create', 'AccountbookController@create');
 Route::get('accountbook/delete', 'AccountbookController@delete');
+Route::get('accountbook/edit', 'AccountbookController@edit');
+Route::post('accountbook/edit', 'AccountbookController@update');

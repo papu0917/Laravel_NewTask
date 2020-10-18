@@ -33,6 +33,24 @@ class AccountbookController extends Controller
         return redirect('accountbook');
     }
 
+    public function edit(Request $request)
+    {
+        $accountbook = Accountbook::find($request->id);
+
+        return view('accountbook.edit', compact('accountbook'));
+    }
+
+    public function update(Request $request)
+    {
+        $accountbook = Accountbook::find($request->id);
+        $accountbook_form = $request->all();
+        unset($accountbook_form['_token']);
+
+        $accountbook->fill($accountbook_form)->save();
+
+        return redirect('accountbook');
+    }
+
     public function delete(Request $request)
     {
         $accountbook = Accountbook::find($request->id);
