@@ -14,6 +14,12 @@
                         </ul>
                     @endif
                     <div class="form-group row">
+                        <label class="col-md-2">購入日</label>
+                        <div class="col-md-10">
+                            <input type="date" class="form-control" name="purchase_date" value="{{ old('purchase_date') }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-md-2">商品名</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="title" value="{{ old('title') }}">

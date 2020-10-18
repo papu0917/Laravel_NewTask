@@ -12,6 +12,7 @@
                         <thead>
                             <tr>
                                 <th width="10%">ID</th>
+                                <th width="15%">購入日</th>
                                 <th width="15%">購入品</th>
                                 <th width="15%">金額</th>
                             </tr>
@@ -20,6 +21,7 @@
                             @foreach ($accountbooks as $accountbook)
                                 <tr>
                                     <th>{{ $accountbook->id }}</th>
+                                    <th>{{ $accountbook->purchase_date }}</th>
                                     <td>{{ \Str::limit($accountbook->title, 100) }}</td>
                                     <td>{{ $accountbook->price }} 円</td>
                                     <td>
