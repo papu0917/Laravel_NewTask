@@ -33,3 +33,10 @@ Route::get('category', 'CategoryController@index');
 Route::get('category/edit', 'CategoryController@edit');
 Route::post('category/edit', 'CategoryController@update');
 Route::get('category/delete', 'CategoryController@delete');
+
+Route::get('tag/create', 'TagController@add');
+Route::post('tag/create', 'TagController@create');
+Route::get('tag', 'TagController@index');
+Route::get('tag/edit', 'TagController@edit');
+Route::post('tag/edit', 'TagController@update');
+Route::get('tag/delete', 'TagController@delete');
