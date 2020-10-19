@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            </h2>購入品一覧</h2>
+            <h2>購入品一覧</h2>
             <p>合計金額: {{ $totalPrice }} 円</p>
         </div>
         <div class="row">
@@ -41,6 +41,7 @@
                         </tbody>
                     </table>
                     <div><a href="/accountbook/create" class="btn btn-default">新規作成</a></div>
+                    <div><a href="/accountbook/create" class="btn btn-default">月別支出額</a></div>
                 </div>
             </div>
         </div>

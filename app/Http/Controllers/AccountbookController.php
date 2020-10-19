@@ -13,17 +13,10 @@ class AccountbookController extends Controller
     public function index(Request $request)
     {
         $accountbooks = Accountbook::all();
+        $accountbooks = Accountbook::latest()->get();
         $totalPrice = Accountbook::sum("price");
 
-        $cond_name = $request->cond_name;
-        if ($cond_name != '') {
-            $accountbooks->whereHas('category', function ($query) use ($cond_name) {
-                $query->where('name', $cond_name);
-            });
-        }
-
-
-        return view('accountbook.index', ['accountbooks' => $accountbooks, 'totalPrice' => $totalPrice, 'cond_name' => $cond_name]);
+        return view('accountbook.index', ['accountbooks' => $accountbooks, 'totalPrice' => $totalPrice]);
     }
 
     public function add()
