@@ -43,6 +43,25 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-md-2">タグ</label>
+                        <div class="col-md-10">
+                            @foreach ($tags as $tag)
+                                <div class="form-check">
+                                    @if ($accountbook->tags->search(function ($item, $key) use ($tag) {
+            return $item->id == $tag->id;
+        }) !== false)
+                                        <input type="checkbox" name="tags[]" id="tag{{ $loop->iteration }}"
+                                            value="{{ $tag->id }}" checked />
+                                    @else
+                                        <input type="checkbox" name="tags[]" id="tag{{ $loop->iteration }}"
+                                            value="{{ $tag->id }}" />
+                                    @endif
+                                    <label for="tag{{ $loop->iteration }}">{{ $tag->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <div class="col-md-10">
                             <input type="hidden" name="id" value="{{ $accountbook->id }}">
                             {{ csrf_field() }}

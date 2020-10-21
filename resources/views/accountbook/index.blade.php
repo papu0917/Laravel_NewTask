@@ -16,6 +16,7 @@
                                 <th width="15%">購入品</th>
                                 <th width="15%">金額</th>
                                 <th width="15%">カテゴリ</th>
+                                <th width="15%">タグ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,6 +27,10 @@
                                     <td>{{ \Str::limit($accountbook->title, 100) }}</td>
                                     <td>{{ $accountbook->price }} 円</td>
                                     <td>{{ $accountbook->category->name }}</td>
+                                    <td>
+                                        @foreach ($accountbook->tags as $tag) {{ $tag->name }}
+                                        @endforeach
+                                    </td>
                                     <td>
                                         <div><a
                                                 href="{{ action('AccountbookController@edit', ['id' => $accountbook->id]) }}">編集</a>
