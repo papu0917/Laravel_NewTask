@@ -26,6 +26,7 @@ Route::post('accountbook/create', 'AccountbookController@create');
 Route::get('accountbook/delete', 'AccountbookController@delete');
 Route::get('accountbook/edit', 'AccountbookController@edit');
 Route::post('accountbook/edit', 'AccountbookController@update');
+Route::get('accountbook/totalAmount', 'AccountbookController@totalEachAmount');
 
 Route::get('category/create', 'CategoryController@add');
 Route::post('category/create', 'CategoryController@create');

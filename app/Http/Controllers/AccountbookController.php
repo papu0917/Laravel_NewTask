@@ -21,6 +21,21 @@ class AccountbookController extends Controller
         return view('accountbook.index', ['accountbooks' => $accountbooks, 'totalPrice' => $totalPrice]);
     }
 
+    public function totalEachAmount(Request $request)
+    {
+        $totalEachAmount = Accountbook::whereYear('created_at', 2020)
+            // ->whereMonth('created_at', 10)
+            ->get()
+            ->groupBy(function ($row) {
+                return $row->created_at->format('m');
+            })
+            ->map(function ($day) {
+                return $day->sum('price');
+            });
+
+        return view('accountbook.totalAmount', compact('totalEachAmount'));
+    }
+
     public function add()
     {
         $tags = Tag::all();
