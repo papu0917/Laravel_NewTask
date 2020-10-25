@@ -6,7 +6,7 @@
             <p>合計金額 : {{ $totalPrice }} 円</p>
         </div>
         <div class="row">
-            <div class="col-lg-8 skyblue">
+            <div class="list-accountbook col-md-12 mx-auto">
                 <div class="row">
                     <table class="table table-dark table-striped">
                         <thead>
@@ -23,7 +23,7 @@
                             @foreach ($accountbooks as $accountbook)
                                 <tr>
                                     <th>{{ $accountbook->id }}</th>
-                                    <th>{{ $accountbook->purchase_date }}</th>
+                                    <th>{{ $accountbook->purchase_date->format('Y-m-d') }}</th>
                                     <td>{{ \Str::limit($accountbook->title, 100) }}</td>
                                     <td>{{ $accountbook->price }} 円</td>
                                     <td>{{ $accountbook->category->name }}</td>
@@ -45,9 +45,6 @@
                     <div><a href="/accountbook/create" class="btn btn-default">新規作成</a></div>
                     <div><a href="/accountbook/totalAmount" class="btn btn-default">月別支出額</a></div>
                 </div>
-            </div>
-            <div class="col-lg-4 pink">
-                2(6/12)
             </div>
         </div>
     </div>

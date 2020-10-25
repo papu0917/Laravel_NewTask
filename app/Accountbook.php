@@ -10,6 +10,10 @@ class Accountbook extends Model
         'user_id', 'title', 'price', 'id', 'purchase_date', 'category_id', 'tag_id',
     ];
 
+    protected $dates = [
+        'purchase_date'
+    ];
+
     public function category()
     {
         return $this->belongsTo('App\Category');
