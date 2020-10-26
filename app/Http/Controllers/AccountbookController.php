@@ -14,15 +14,12 @@ class AccountbookController extends Controller
 {
     public function index(Request $request)
     {
-        // $accountbooks = Accountbook::all();
-        $accountbooks = Accountbook::select('accountbooks.*')
-            ->orderBy('purchase_date', 'DESC')
-            ->get();
-
         $totalAmount = Accountbook::sum("price");
-        $posts = Accountbook::paginate(10);
+        $accountbooks = Accountbook::select('accountbooks.*');
+        $accountbooks->orderBy('purchase_date', 'DESC');
+        $posts = $accountbooks->paginate(10);
 
-        return view('accountbook.index', compact('accountbooks', 'totalAmount', 'posts'));
+        return view('accountbook.index', compact('totalAmount', 'posts'));
     }
 
     public function totalEachAmount(Request $request)

@@ -20,7 +20,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($accountbooks as $accountbook)
+                            @foreach ($posts as $accountbook)
                                 <tr>
                                     <th>{{ $accountbook->id }}</th>
                                     <th>{{ $accountbook->purchase_date->format('Y-m-d') }}</th>
@@ -47,7 +47,7 @@
             <div class="row">
                 <div class="col-lg-2pink">
                     <table class="table table-dark table-striped">
-                        <div><a href="/accountbook/create" class="btn btn-default">新規作成</a></div>
+                        <div><a href="/accountbook/create" class="btn btn-default">支出登録</a></div>
                         <div><a href="/accountbook/totalAmount" class="btn btn-default">過去の支出一覧</a></div>
                     </table>
                 </div>
