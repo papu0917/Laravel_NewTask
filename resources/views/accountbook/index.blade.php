@@ -1,12 +1,12 @@
 @extends('accountbook/layout')
 @section('content')
-    <div class="container">
+    <div class="container" style="background: skyblue;height: 100px;">
         <div class="row">
-            <h2>購入品一覧</h2>
-            <p>合計金額 : {{ $totalPrice }} 円</p>
+            <h1>支出一覧</h1>
+            <p>合計金額 : {{ $totalAmount }} 円</p>
         </div>
         <div class="row">
-            <div class="list-accountbook col-md-12 mx-auto">
+            <div class="col-lg-10 skyblue">
                 <div class="row">
                     <table class="table table-dark table-striped">
                         <thead>
@@ -42,10 +42,16 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div><a href="/accountbook/create" class="btn btn-default">新規作成</a></div>
-                    <div><a href="/accountbook/totalAmount" class="btn btn-default">月別支出額</a></div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-2pink">
+                    <table class="table table-dark table-striped">
+                        <div><a href="/accountbook/create" class="btn btn-default">新規作成</a></div>
+                        <div><a href="/accountbook/totalAmount" class="btn btn-default">過去の支出一覧</a></div>
+                    </table>
+                </div>
+            </div>
+            {{ $posts->links() }}
         </div>
-    </div>
-@endsection
+    @endsection

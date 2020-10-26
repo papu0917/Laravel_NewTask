@@ -2,8 +2,9 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h2>月別一覧</h2>
-            <p>{{ $totalEachAmount }}</p>
+            <h1>月/年別支出一覧</h1>
+            <p>{{ $totalAmountMonth }}</p>
+            <p>{{ $totalAmountYear }}</p>
         </div>
     </div>
 @endsection

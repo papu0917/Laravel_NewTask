@@ -14,17 +14,20 @@ class AccountbookController extends Controller
 {
     public function index(Request $request)
     {
+        // $accountbooks = Accountbook::all();
         $accountbooks = Accountbook::select('accountbooks.*')
             ->orderBy('purchase_date', 'DESC')
             ->get();
-        $totalPrice = Accountbook::sum("price");
 
-        return view('accountbook.index', ['accountbooks' => $accountbooks, 'totalPrice' => $totalPrice]);
+        $totalAmount = Accountbook::sum("price");
+        $posts = Accountbook::paginate(10);
+
+        return view('accountbook.index', compact('accountbooks', 'totalAmount', 'posts'));
     }
 
     public function totalEachAmount(Request $request)
     {
-        $totalEachAmount = Accountbook::whereYear('purchase_date', 2020)
+        $totalAmountMonth = Accountbook::whereYear('purchase_date', 2020)
             ->whereMonth('purchase_date', 10)
             ->get()
             ->groupBy(function ($row) {
@@ -35,7 +38,17 @@ class AccountbookController extends Controller
             })
             ->pop();
         // dd($totalEachAmount);
-        return view('accountbook.totalAmount', compact('totalEachAmount'));
+
+        $totalAmountYear = Accountbook::whereYear('purchase_date', 2020)
+            ->get()
+            ->groupBy(function ($row) {
+                return $row->purchase_date->format('y');
+            })
+            ->map(function ($day) {
+                return $day->sum('price');
+            })
+            ->pop();
+        return view('accountbook.totalAmount', compact('totalAmountMonth', 'totalAmountYear'));
     }
 
     public function add()
