@@ -48,7 +48,7 @@
                 <div class="col-lg-2pink">
                     <table class="table table-dark table-striped">
                         <div><a href="/accountbook/create" class="btn btn-default">支出登録</a></div>
-                        <div><a href="/accountbook/totalAmount" class="btn btn-default">過去の支出一覧</a></div>
+                        <div><a href="/accountbook/eachYear" class="btn btn-default">過去の支出一覧</a></div>
                     </table>
                 </div>
             </div>

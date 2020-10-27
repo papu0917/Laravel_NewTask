@@ -26,7 +26,10 @@ Route::post('accountbook/create', 'AccountbookController@create');
 Route::get('accountbook/delete', 'AccountbookController@delete');
 Route::get('accountbook/edit', 'AccountbookController@edit');
 Route::post('accountbook/edit', 'AccountbookController@update');
-Route::get('accountbook/totalAmount', 'AccountbookController@totalEachAmount');
+Route::get('accountbook/eachYear', 'AccountbookController@eachYear');
+Route::get('accountbook/eachAmount', 'AccountbookController@eachAmount');
+Route::get('accountbook/eachAmount/amountMonth', 'AccountbookController@amountMonth');
+
 
 Route::get('category/create', 'CategoryController@add');
 Route::post('category/create', 'CategoryController@create');

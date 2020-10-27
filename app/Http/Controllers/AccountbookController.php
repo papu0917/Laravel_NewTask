@@ -22,7 +22,31 @@ class AccountbookController extends Controller
         return view('accountbook.index', compact('totalAmount', 'posts'));
     }
 
-    public function totalEachAmount(Request $request)
+    public function amountMonth(Request $request)
+    {
+        // dd($request);
+        // $form = $request->all();
+        // unset($form['_token']);
+        $amountMonth = Accountbook::whereYear('purchase_date', 2020)
+            ->whereMonth('purchase_date', $request->requests)
+            ->get()
+            ->groupBy(function ($row) {
+                return $row->purchase_date->format('m');
+            })
+            ->map(function ($day) {
+                return $day->sum('price');
+            })
+            ->pop();
+
+        return view('accountbook.amountMonth', compact('amountMonth', 'request'));
+    }
+
+    public function eachYear(Request $request)
+    {
+        return view('accountbook.eachYear');
+    }
+
+    public function eachAmount(Request $request)
     {
         $totalAmountMonth = Accountbook::whereYear('purchase_date', 2020)
             ->whereMonth('purchase_date', 10)
@@ -45,7 +69,7 @@ class AccountbookController extends Controller
                 return $day->sum('price');
             })
             ->pop();
-        return view('accountbook.totalAmount', compact('totalAmountMonth', 'totalAmountYear'));
+        return view('accountbook.eachAmount', compact('totalAmountMonth', 'totalAmountYear'));
     }
 
     public function add()
@@ -71,7 +95,6 @@ class AccountbookController extends Controller
 
     public function edit(Request $request)
     {
-
         $accountbook = Accountbook::find($request->id);
         $categories = Category::all();
         $tags = Tag::all();
@@ -84,7 +107,6 @@ class AccountbookController extends Controller
         $accountbook = Accountbook::find($request->id);
         $accountbook_form = $request->all();
         unset($accountbook_form['_token']);
-
         $accountbook->fill($accountbook_form)->save();
         $accountbook->tags()->sync($request->tags);
 
