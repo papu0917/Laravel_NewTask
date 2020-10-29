@@ -2,8 +2,8 @@
 @section('content')
     <div class="container">
         <div class="row">
-            @foreach ($prices as $key => $price)
- {{ $key }}月の合計支出額は{{ $price }}円です。
+            @foreach ($categories as $key => $category)
+ {{ $key }}の合計は{{$category}}円です。
 @endforeach
         </div>
     </div>

@@ -17,7 +17,10 @@ class AccountbookController extends Controller
         $totalAmount = Accountbook::sum("price");
         $accountbooks = Accountbook::select('accountbooks.*');
         $accountbooks->orderBy('purchase_date', 'DESC');
+        // $accountbooks->where('purchase_date', 'm');
         $posts = $accountbooks->paginate(10);
+
+
 
         return view('accountbook.index', compact('totalAmount', 'posts'));
     }
@@ -25,9 +28,7 @@ class AccountbookController extends Controller
     public function amountMonth(Request $request)
     {
         // dd($request);
-        // $form = $request->all();
-        // unset($form['_token']);
-        $amountMonth = Accountbook::whereYear('purchase_date', 2020)
+        $prices = Accountbook::whereYear('purchase_date', 2020)
             ->whereMonth('purchase_date', $request->requests)
             ->get()
             ->groupBy(function ($row) {
@@ -35,10 +36,24 @@ class AccountbookController extends Controller
             })
             ->map(function ($day) {
                 return $day->sum('price');
-            })
-            ->pop();
+            });
 
-        return view('accountbook.amountMonth', compact('amountMonth', 'request'));
+
+        return view('accountbook.amountMonth', compact('prices'));
+    }
+
+    public function amountCategory(Request $request)
+    {
+        $categories = Accountbook::where('category_id', $request->requests)
+            ->get()
+            ->groupBy(function ($row) {
+                return $row->category->name;
+            })
+            ->map(function ($value) {
+                return $value->sum('price');
+            });
+
+        return view('accountbook.amountCategory', compact('categories'));
     }
 
     public function eachYear(Request $request)

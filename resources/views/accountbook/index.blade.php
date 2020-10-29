@@ -1,12 +1,12 @@
 @extends('accountbook/layout')
 @section('content')
-    <div class="container" style="background: skyblue;height: 100px;">
+    <div class="container" style="background: orange;height: 70px;">
         <div class="row">
             <h1>支出一覧</h1>
             <p>合計金額 : {{ $totalAmount }} 円</p>
         </div>
         <div class="row">
-            <div class="col-lg-10 skyblue">
+            <div class="col-md-9">
                 <div class="row">
                     <table class="table table-dark table-striped">
                         <thead>
@@ -44,14 +44,19 @@
                     </table>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-2pink">
-                    <table class="table table-dark table-striped">
-                        <div><a href="/accountbook/create" class="btn btn-default">支出登録</a></div>
-                        <div><a href="/accountbook/eachYear" class="btn btn-default">過去の支出一覧</a></div>
-                    </table>
+            <div class="container">
+                <div class=" row">
+                    <h1>支出をつけよう!</h1>
+                    <div class="col-md-5pink">
+                        <div class="row">
+                            <div><a href="/accountbook/create" class="btn btn-warning">支出登録</a></div>
+                            <div><a href="/accountbook/eachYear" class="btn btn-warning">過去の支出一覧</a></div>
+                            <div><a href="/accountbook/eachYear" class="btn btn-warning">カテゴリ別支出合計</a></div>
+                        </div>
+                    </div>
                 </div>
+                {{ $posts->links() }}
             </div>
-            {{ $posts->links() }}
         </div>
-    @endsection
+    </div>
+@endsection

@@ -2,11 +2,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h1>2020年月別支出一覧</h1>
-            <p>{{ $totalAmountMonth }} 円は月合計</p>
-            <p>{{ $totalAmountYear }} 円は年合計</p>
+            <h1>2020年</h1>
+            <p>2020年の支出合計は{{ $totalAmountYear }} 円です</p>
         </div>
         <form action="{{ action('AccountbookController@amountMonth') }}" method="get">
+            <label class="col-md-2">月別</label>
             <select name="requests">
                 <option>選択してください</option>
                 <option value="12" selected="selected">12月</option>
@@ -21,6 +21,17 @@
                 <option value="3" selected="selected">3月</option>
                 <option value="2" selected="selected">2月</option>
                 <option value="1" selected="selected">1月</option>
+            </select>
+            <input type="submit" class="btn btn-primary" value="実行">
+        </form>
+         <form action="{{ action('AccountbookController@amountCategory') }}" method="get">
+            <label class="col-md-2">カテゴリ別</label>
+            <select name="requests">
+                <option>選択してください</option>
+                <option value="2" selected="selected">食費</option>
+                <option value="3" selected="selected">日用品</option>
+                <option value="5" selected="selected">雑費</option>
+                <option value="4" selected="selected">その他</option>
             </select>
             <input type="submit" class="btn btn-primary" value="実行">
         </form>
