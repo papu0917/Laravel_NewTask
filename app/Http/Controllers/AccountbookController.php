@@ -20,8 +20,6 @@ class AccountbookController extends Controller
         // $accountbooks->where('purchase_date', 'm');
         $posts = $accountbooks->paginate(10);
 
-
-
         return view('accountbook.index', compact('totalAmount', 'posts'));
     }
 
@@ -37,7 +35,6 @@ class AccountbookController extends Controller
             ->map(function ($day) {
                 return $day->sum('price');
             });
-
 
         return view('accountbook.amountMonth', compact('prices'));
     }
@@ -55,6 +52,21 @@ class AccountbookController extends Controller
 
         return view('accountbook.amountCategory', compact('categories'));
     }
+
+    public function amountTag(Request $request)
+    {
+        $tags = Accountbook::whereHas('tags->id', 3)
+            ->get()
+            ->groupBy(function ($row) {
+                return $row->tags->id;
+            })
+            ->map(function ($value) {
+                return $value->sum('price');
+            });
+
+        return view('accountbook.amountTag', compact('tags'));
+    }
+
 
     public function eachYear(Request $request)
     {

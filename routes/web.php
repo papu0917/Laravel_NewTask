@@ -30,6 +30,7 @@ Route::get('accountbook/eachYear', 'AccountbookController@eachYear');
 Route::get('accountbook/eachAmount', 'AccountbookController@eachAmount');
 Route::get('accountbook/eachAmount/amountMonth', 'AccountbookController@amountMonth');
 Route::get('accountbook/eachAmount/amountCategory', 'AccountbookController@amountCategory');
+Route::get('accountbook/eachAmount/amountTag', 'AccountbookController@amountTag');
 
 
 Route::get('category/create', 'CategoryController@add');

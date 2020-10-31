@@ -35,5 +35,18 @@
             </select>
             <input type="submit" class="btn btn-primary" value="実行">
         </form>
+        <form action="{{ action('AccountbookController@amountTag') }}" method="get">
+            <label class="col-md-2">タグ別</label>
+            <select name="requests">
+                <option>選択してください</option>
+                <option value="3" selected="selected">その他</option>
+                <option value="4" selected="selected">食料品</option>
+                <option value="5" selected="selected">外食</option>
+                <option value="6" selected="selected">生活消耗品</option>
+                <option value="7" selected="selected">雑費</option>
+                <option value="8" selected="selected">酒</option>
+            </select>
+            <input type="submit" class="btn btn-primary" value="実行">
+        </form>
     </div>
 @endsection

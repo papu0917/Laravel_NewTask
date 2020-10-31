@@ -51,7 +51,6 @@
                         <div class="row">
                             <div><a href="/accountbook/create" class="btn btn-warning">支出登録</a></div>
                             <div><a href="/accountbook/eachYear" class="btn btn-warning">過去の支出一覧</a></div>
-                            <div><a href="/accountbook/eachYear" class="btn btn-warning">カテゴリ別支出合計</a></div>
                         </div>
                     </div>
                 </div>
