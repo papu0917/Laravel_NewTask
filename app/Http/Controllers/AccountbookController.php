@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Accountbook;
 use App\Category;
@@ -14,18 +15,30 @@ class AccountbookController extends Controller
 {
     public function index(Request $request)
     {
-        $totalAmount = Accountbook::sum("price");
-        $accountbooks = Accountbook::select('accountbooks.*');
+        // $totalAmount = Accountbook::sum("price");
+        $totalPrices = Accountbook::whereYear('purchase_date', 2020)
+            ->whereMonth('purchase_date', Carbon::now())
+            ->get()
+            ->groupBy(function ($row) {
+                return $row->purchase_date->format('m');
+            })
+            ->map(function ($day) {
+                return $day->sum('price');
+            });
+
+        $accountbooks = Accountbook::whereMonth('purchase_date', Carbon::now());
         $accountbooks->orderBy('purchase_date', 'DESC');
         // $accountbooks->where('purchase_date', 'm');
         $posts = $accountbooks->paginate(10);
 
-        return view('accountbook.index', compact('totalAmount', 'posts'));
+        return view('accountbook.index', compact('totalPrices', 'posts'));
     }
 
     public function amountMonth(Request $request)
     {
+        //変数名ごっちゃになってきてるから気をつけて自分。
         // dd($request);
+        //　Carbon::now()は現在、過去の場合はどうする？　
         $prices = Accountbook::whereYear('purchase_date', 2020)
             ->whereMonth('purchase_date', $request->requests)
             ->get()
@@ -55,10 +68,10 @@ class AccountbookController extends Controller
 
     public function amountTag(Request $request)
     {
-        $tags = Accountbook::whereHas('tags->id', 3)
+        $tags = Accountbook::whereColumn('accountbook_tag', 4)
             ->get()
             ->groupBy(function ($row) {
-                return $row->tags->id;
+                return $row->tag->name;
             })
             ->map(function ($value) {
                 return $value->sum('price');

@@ -2,8 +2,10 @@
 @section('content')
     <div class="container" style="background: orange;height: 70px;">
         <div class="row">
-            <h1>支出一覧</h1>
-            <p>合計金額 : {{ $totalAmount }} 円</p>
+        <h1>支出一覧</h1>
+            @foreach ($totalPrices as $key => $totalPrice)
+            <h2>{{ $key }}月の合計支出額は{{ $totalPrice }}円です。<h2>
+            @endforeach
         </div>
         <div class="row">
             <div class="col-md-9">
