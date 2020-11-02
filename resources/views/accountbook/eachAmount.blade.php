@@ -7,7 +7,7 @@
         </div>
         <form action="{{ action('AccountbookController@amountMonth') }}" method="get">
             <label class="col-md-2">月別</label>
-            <select name="requests">
+            <select name="purcahse_date_month">
                 <option>選択してください</option>
                 <option value="12" selected="selected">12月</option>
                 <option value="11" selected="selected">11月</option>
@@ -26,7 +26,7 @@
         </form>
          <form action="{{ action('AccountbookController@amountCategory') }}" method="get">
             <label class="col-md-2">カテゴリ別</label>
-            <select name="requests">
+            <select name="category_id">
                 <option>選択してください</option>
                 <option value="2" selected="selected">食費</option>
                 <option value="3" selected="selected">日用品</option>
@@ -37,7 +37,7 @@
         </form>
         <form action="{{ action('AccountbookController@amountTag') }}" method="get">
             <label class="col-md-2">タグ別</label>
-            <select name="requests">
+            <select name="tag_id">
                 <option>選択してください</option>
                 <option value="3" selected="selected">その他</option>
                 <option value="4" selected="selected">食料品</option>

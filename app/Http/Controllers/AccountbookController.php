@@ -15,7 +15,7 @@ class AccountbookController extends Controller
 {
     public function index(Request $request)
     {
-        // $totalAmount = Accountbook::sum("price");
+
         $totalPrices = Accountbook::whereYear('purchase_date', 2020)
             ->whereMonth('purchase_date', Carbon::now())
             ->get()
@@ -34,13 +34,23 @@ class AccountbookController extends Controller
         return view('accountbook.index', compact('totalPrices', 'posts'));
     }
 
+    public function search(Request $request)
+    {
+        $user = Auth::user();
+        $accountbookQuery = Accountbook::where('user_id', $user->id);
+
+        if (!empty($request->category_id)) {
+            $accountbookQuery->where('category_id', $request->category_id);
+        }
+    }
+
     public function amountMonth(Request $request)
     {
-        //変数名ごっちゃになってきてるから気をつけて自分。
+        //変数名ごっちゃになってきてるから気をつけて。
         // dd($request);
         //　Carbon::now()は現在、過去の場合はどうする？　
         $prices = Accountbook::whereYear('purchase_date', 2020)
-            ->whereMonth('purchase_date', $request->requests)
+            ->whereMonth('purchase_date', $request->purcahse_date_month)
             ->get()
             ->groupBy(function ($row) {
                 return $row->purchase_date->format('m');
@@ -54,7 +64,7 @@ class AccountbookController extends Controller
 
     public function amountCategory(Request $request)
     {
-        $categories = Accountbook::where('category_id', $request->requests)
+        $categories = Accountbook::where('category_id', $request->category_id)
             ->get()
             ->groupBy(function ($row) {
                 return $row->category->name;
@@ -68,16 +78,13 @@ class AccountbookController extends Controller
 
     public function amountTag(Request $request)
     {
-        $tags = Accountbook::whereColumn('accountbook_tag', 4)
-            ->get()
-            ->groupBy(function ($row) {
-                return $row->tag->name;
-            })
-            ->map(function ($value) {
-                return $value->sum('price');
-            });
+        $posts = Accountbook::whereHas('tags', function ($query) use ($request) {
+            // slugをkeywordで検索
+            $query->where('tags.id', $request->tag_id);
+        })->get();
+        dd($posts);
 
-        return view('accountbook.amountTag', compact('tags'));
+        return view('accountbook.amountTag', compact('posts'));
     }
 
 
