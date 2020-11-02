@@ -25,28 +25,25 @@
             <input type="submit" class="btn btn-primary" value="実行">
         </form>
          <form action="{{ action('AccountbookController@amountCategory') }}" method="get">
-            <label class="col-md-2">カテゴリ別</label>
+        <label class="col-md-2">カテゴリ別</label>
+        <div>
             <select name="category_id">
                 <option>選択してください</option>
-                <option value="2" selected="selected">食費</option>
-                <option value="3" selected="selected">日用品</option>
-                <option value="5" selected="selected">雑費</option>
-                <option value="4" selected="selected">その他</option>
+                @foreach ($eachCategory as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
             </select>
             <input type="submit" class="btn btn-primary" value="実行">
+        </div>
         </form>
         <form action="{{ action('AccountbookController@amountTag') }}" method="get">
             <label class="col-md-2">タグ別</label>
-            <select name="tag_id">
-                <option>選択してください</option>
-                <option value="3" selected="selected">その他</option>
-                <option value="4" selected="selected">食料品</option>
-                <option value="5" selected="selected">外食</option>
-                <option value="6" selected="selected">生活消耗品</option>
-                <option value="7" selected="selected">雑費</option>
-                <option value="8" selected="selected">酒</option>
-            </select>
+            <div>
+                @foreach ($eachTag as $tag)
+                    <input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->name }}
+                @endforeach
             <input type="submit" class="btn btn-primary" value="実行">
+            </div>
         </form>
     </div>
 @endsection

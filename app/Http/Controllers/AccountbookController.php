@@ -34,6 +34,26 @@ class AccountbookController extends Controller
         return view('accountbook.index', compact('totalPrices', 'posts'));
     }
 
+    public function amountMonthList(Request $request)
+    {
+        $totalPrices = Accountbook::whereYear('purchase_date', 2020)
+            ->whereMonth('purchase_date', $request->purcahse_date_month)
+            ->get()
+            ->groupBy(function ($row) {
+                return $row->purchase_date->format('m');
+            })
+            ->map(function ($day) {
+                return $day->sum('price');
+            });
+
+        // $request->purcahse_date_monthを使うとページネーションがおかしくなる
+        $accountbookList = Accountbook::whereMonth('purchase_date', $request->purcahse_date_month);
+        $accountbookList->orderBy('purchase_date', 'DESC');
+        $postsList = $accountbookList->paginate(10);
+
+        return view('accountbook.amountMonthList', compact('totalPrices', 'postsList'));
+    }
+
     public function search(Request $request)
     {
         $user = Auth::user();
@@ -80,13 +100,18 @@ class AccountbookController extends Controller
     {
         $posts = Accountbook::whereHas('tags', function ($query) use ($request) {
             // slugをkeywordで検索
-            $query->where('tags.id', $request->tag_id);
-        })->get();
-        dd($posts);
+            $query->where('tags.id', $request->tags);
+        })->get()
+            ->groupBy(function ($row) {
+                return $row->tag;
+            })
+            ->map(function ($value) {
+                return $value->sum('price');
+            });
+        // dd($posts);
 
         return view('accountbook.amountTag', compact('posts'));
     }
-
 
     public function eachYear(Request $request)
     {
@@ -95,6 +120,8 @@ class AccountbookController extends Controller
 
     public function eachAmount(Request $request)
     {
+        $eachTag = Tag::all();;
+        $eachCategory = Category::all();
         $totalAmountMonth = Accountbook::whereYear('purchase_date', 2020)
             ->whereMonth('purchase_date', 10)
             ->get()
@@ -116,7 +143,7 @@ class AccountbookController extends Controller
                 return $day->sum('price');
             })
             ->pop();
-        return view('accountbook.eachAmount', compact('totalAmountMonth', 'totalAmountYear'));
+        return view('accountbook.eachAmount', compact('totalAmountMonth', 'totalAmountYear', 'eachCategory', 'eachTag'));
     }
 
     public function add()
