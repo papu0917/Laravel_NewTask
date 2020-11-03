@@ -84,7 +84,7 @@ class AccountbookController extends Controller
 
     public function amountCategory(Request $request)
     {
-        $categories = Accountbook::where('category_id', $request->category_id)
+        $accountbookByCategory = Accountbook::where('category_id', $request->category_id)
             ->get()
             ->groupBy(function ($row) {
                 return $row->category->name;
@@ -93,13 +93,12 @@ class AccountbookController extends Controller
                 return $value->sum('price');
             });
 
-        return view('accountbook.amountCategory', compact('categories'));
+        return view('accountbook.amountCategory', compact('accountbookByCategory'));
     }
 
     public function amountTag(Request $request)
     {
-        $posts = Accountbook::whereHas('tags', function ($query) use ($request) {
-            // slugをkeywordで検索
+        $accountbookByTag = Accountbook::whereHas('tags', function ($query) use ($request) {
             $query->where('tags.id', $request->tags);
         })->get()
             ->groupBy(function ($row) {
@@ -108,9 +107,9 @@ class AccountbookController extends Controller
             ->map(function ($value) {
                 return $value->sum('price');
             });
-        // dd($posts);
+        // dd($accountbookByTag);
 
-        return view('accountbook.amountTag', compact('posts'));
+        return view('accountbook.amountTag', compact('accountbookByTag'));
     }
 
     public function eachYear(Request $request)
