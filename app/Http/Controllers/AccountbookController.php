@@ -28,47 +28,72 @@ class AccountbookController extends Controller
 
         $accountbooks = Accountbook::whereMonth('purchase_date', Carbon::now());
         $accountbooks->orderBy('purchase_date', 'DESC');
-        // $accountbooks->where('purchase_date', 'm');
         $posts = $accountbooks->paginate(10);
 
         return view('accountbook.index', compact('totalPrices', 'posts'));
     }
 
-    public function amountMonthList(Request $request)
-    {
-        $totalPrices = Accountbook::whereYear('purchase_date', 2020)
-            ->whereMonth('purchase_date', $request->purcahse_date_month)
-            ->get()
-            ->groupBy(function ($row) {
-                return $row->purchase_date->format('m');
-            })
-            ->map(function ($day) {
-                return $day->sum('price');
-            });
-
-        // $request->purcahse_date_monthを使うとページネーションがおかしくなる
-        $accountbookList = Accountbook::whereMonth('purchase_date', $request->purcahse_date_month);
-        $accountbookList->orderBy('purchase_date', 'DESC');
-        $postsList = $accountbookList->paginate(10);
-
-        return view('accountbook.amountMonthList', compact('totalPrices', 'postsList'));
-    }
-
     public function search(Request $request)
     {
+
         $user = Auth::user();
-        $accountbookQuery = Accountbook::where('user_id', $user->id);
+        $categories = Category::all();
+        $tags = Tag::all();
+        // $accountbookQuery = Accountbook::where('user_id', $user->id);
+
+        // if (!empty($request->category_id)) {
+        //     $accountbookQuery->where('category_id', $request->category_id);
+        // }
+
+        // if (!empty($request->tags)) {
+        //     $accountbookQuery->whereHas('tags', function ($query) use ($request) {
+        //         $query->where('tags.id', $request->tags);
+        //     });
+        // }
+
+        // if (!empty($request->purcahse_date_month)) {
+        //     $accountbookQuery->whereYear('purchase_date', 2020)
+        //         ->whereMonth('purchase_date', $request->purcahse_date_month);
+        // }
+
+        // $accountbookQuery->get();
+
+        return view('accountbook.search', compact('categories', 'tags'));
+    }
+
+    public function searchResults(Request $request)
+    {
+
+        if (!empty($request->purcahse_date_month)) {
+            $accountbookQuery = Accountbook::whereYear('purchase_date', 2020)
+                ->whereMonth('purchase_date', $request->purcahse_date_month);
+        }
 
         if (!empty($request->category_id)) {
             $accountbookQuery->where('category_id', $request->category_id);
         }
+
+        if (!empty($request->tags)) {
+            $accountbookQuery->whereHas('tags', function ($query) use ($request) {
+                $query->where('tags.id', $request->tags);
+            });
+        }
+
+        $query = $accountbookQuery->get()
+            ->groupBy(function ($row) {
+                return $row->purchase_date->format('m');
+            })
+            ->map(function ($value) {
+                return $value->sum('price');
+            });
+        dd($query);
+
+        return view('accountbook.searchResults', compact('query'));
     }
+
 
     public function amountMonth(Request $request)
     {
-        //変数名ごっちゃになってきてるから気をつけて。
-        // dd($request);
-        //　Carbon::now()は現在、過去の場合はどうする？　
         $prices = Accountbook::whereYear('purchase_date', 2020)
             ->whereMonth('purchase_date', $request->purcahse_date_month)
             ->get()
@@ -78,8 +103,11 @@ class AccountbookController extends Controller
             ->map(function ($day) {
                 return $day->sum('price');
             });
+        $accountbookList = Accountbook::whereMonth('purchase_date', $request->purcahse_date_month);
+        $accountbookList->orderBy('purchase_date', 'DESC');
+        $postsList = $accountbookList->paginate(10);
 
-        return view('accountbook.amountMonth', compact('prices'));
+        return view('accountbook.amountMonth', compact('prices', 'postsList'));
     }
 
     public function amountCategory(Request $request)
@@ -94,6 +122,10 @@ class AccountbookController extends Controller
             });
 
         return view('accountbook.amountCategory', compact('accountbookByCategory'));
+    }
+
+    public function eachCategory(Request $request)
+    {
     }
 
     public function amountTag(Request $request)

@@ -31,7 +31,8 @@ Route::get('accountbook/eachAmount', 'AccountbookController@eachAmount');
 Route::get('accountbook/eachAmount/amountMonth', 'AccountbookController@amountMonth');
 Route::get('accountbook/eachAmount/amountCategory', 'AccountbookController@amountCategory');
 Route::get('accountbook/eachAmount/amountTag', 'AccountbookController@amountTag');
-Route::get('accountbook/amountMonthList', 'AccountbookController@amountMonthList');
+Route::get('accountbook/search/', 'AccountbookController@search');
+Route::get('accountbook/search/searchResults', 'AccountbookController@searchResults');
 
 Route::get('category/create', 'CategoryController@add');
 Route::post('category/create', 'CategoryController@create');

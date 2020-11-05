@@ -9,32 +9,32 @@
             <label class="col-md-2">月別</label>
             <select name="purcahse_date_month">
                 <option>選択してください</option>
-                <option value="12" selected="selected">12月</option>
-                <option value="11" selected="selected">11月</option>
-                <option value="10" selected="selected">10月</option>
-                <option value="9" selected="selected">9月</option>
-                <option value="8" selected="selected">8月</option>
-                <option value="7" selected="selected">7月</option>
-                <option value="6" selected="selected">6月</option>
-                <option value="5" selected="selected">5月</option>
-                <option value="4" selected="selected">4月</option>
-                <option value="3" selected="selected">3月</option>
-                <option value="2" selected="selected">2月</option>
-                <option value="1" selected="selected">1月</option>
+                <option value="12">12月</option>
+                <option value="11">11月</option>
+                <option value="10">10月</option>
+                <option value="9">9月</option>
+                <option value="8">8月</option>
+                <option value="7">7月</option>
+                <option value="6">6月</option>
+                <option value="5">5月</option>
+                <option value="4">4月</option>
+                <option value="3">3月</option>
+                <option value="2">2月</option>
+                <option value="1">1月</option>
             </select>
             <input type="submit" class="btn btn-primary" value="実行">
         </form>
-         <form action="{{ action('AccountbookController@amountCategory') }}" method="get">
-        <label class="col-md-2">カテゴリ別</label>
-        <div>
-            <select name="category_id">
-                <option>選択してください</option>
-                @foreach ($eachCategory as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-            <input type="submit" class="btn btn-primary" value="実行">
-        </div>
+        <form action="{{ action('AccountbookController@amountCategory') }}" method="get">
+            <label class="col-md-2">カテゴリ別</label>
+            <div>
+                <select name="category_id">
+                    <option>選択してください</option>
+                    @foreach ($eachCategory as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                <input type="submit" class="btn btn-primary" value="実行">
+            </div>
         </form>
         <form action="{{ action('AccountbookController@amountTag') }}" method="get">
             <label class="col-md-2">タグ別</label>
@@ -42,7 +42,7 @@
                 @foreach ($eachTag as $tag)
                     <input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->name }}
                 @endforeach
-            <input type="submit" class="btn btn-primary" value="実行">
+                <input type="submit" class="btn btn-primary" value="実行">
             </div>
         </form>
     </div>
