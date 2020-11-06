@@ -81,12 +81,12 @@ class AccountbookController extends Controller
 
         $query = $accountbookQuery->get()
             ->groupBy(function ($row) {
-                return $row->purchase_date->format('m');
+                return $row->accountbookQuery;
             })
             ->map(function ($value) {
                 return $value->sum('price');
             });
-        dd($query);
+        // dd($query);
 
         return view('accountbook.searchResults', compact('query'));
     }

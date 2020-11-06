@@ -1,14 +1,23 @@
 @extends('accountbook/layout')
 @section('content')
-    <div class="container" style="background: orange;height: 70px;">
-        <div class="row">
-            <h1>支出一覧</h1>
-            @foreach ($totalPrices as $key => $totalPrice)
-                <h2>{{ $key }}月の合計支出額は{{ $totalPrice }}円です。<h2>
-            @endforeach
+    <div class="container">
+        <div class="header" style="background-color: #26d0c9;height: 90px; color: #fff;">
+            <div class=" header-logo" style="float: left; font-size: 36px; padding: 20px 40px;">支出一覧</div>
+            <div class="header-list" style="float: left; padding: 33px 20px;">
+                <thead>
+                    <tr>
+                        <a href="/accountbook/create" class="btn btn-warning">支出登録</a>
+                        <a href="/accountbook/eachYear" class="btn btn-warning">過去の支出一覧</a>
+                        <a href="/accountbook/search" class="btn btn-warning">絞り込み</a>
+                    </tr>
+                </thead>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-9">
+        <div class="main" style="padding: 30px 30px;">
+            @foreach ($totalPrices as $key => $totalPrice)
+                <h1>{{ $key }}月の合計支出額は{{ $totalPrice }}円です。</h1>
+            @endforeach
+            <div class="col-md-12">
                 <div class="row">
                     <table class="table table-dark table-striped">
                         <thead>
@@ -47,19 +56,7 @@
                     </table>
                 </div>
             </div>
-            <div class="container">
-                <div class=" row">
-                    <h1>支出をつけよう!</h1>
-                    <div class="col-md-5pink">
-                        <div class="row">
-                            <div><a href="/accountbook/create" class="btn btn-warning">支出登録</a></div>
-                            <div><a href="/accountbook/eachYear" class="btn btn-warning">過去の支出一覧</a></div>
-                            <div><a href="/accountbook/search" class="btn btn-warning">絞り込み</a></div>
-                        </div>
-                    </div>
-                </div>
-                {{ $posts->links() }}
-            </div>
+            {{ $posts->links() }}
         </div>
     </div>
 @endsection
