@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($postsList as $accountbook)
+                            @foreach ($posts as $accountbook)
                                 <tr>
                                     <th>{{ $accountbook->id }}</th>
                                     <th>{{ $accountbook->purchase_date->format('Y-m-d') }}</th>
@@ -39,7 +39,7 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $postsList->links() }}
+                {{ $posts->links() }}
             </div>
         </div>
     </div>

@@ -9,6 +9,7 @@
                         <a href="/accountbook/create" class="btn btn-warning">支出登録</a>
                         <a href="/accountbook/eachYear" class="btn btn-warning">過去の支出一覧</a>
                         <a href="/accountbook/search" class="btn btn-warning">絞り込み</a>
+                        <a href="/accountbook/search" class="btn btn-warning">予算設定</a>
                     </tr>
                 </thead>
             </div>
@@ -17,6 +18,7 @@
             @foreach ($totalPrices as $key => $totalPrice)
                 <h1>{{ $key }}月の合計支出額は{{ $totalPrice }}円です。</h1>
             @endforeach
+            {{-- <p>{{ $attentionTag }}</p> --}}
             <div class="col-md-12">
                 <div class="row">
                     <table class="table table-dark table-striped">

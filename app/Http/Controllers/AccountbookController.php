@@ -30,7 +30,18 @@ class AccountbookController extends Controller
         $accountbooks->orderBy('purchase_date', 'DESC');
         $posts = $accountbooks->paginate(10);
 
-        return view('accountbook.index', compact('totalPrices', 'posts'));
+        return view('accountbook.index', compact('totalPrices', 'posts', 'attentionTag', 'items'));
+    }
+
+    public function tagsCount(Request $request)
+    {
+        // //withCountメソッドでリレーションの数を取得
+        // $attentionTag = Tag::where('tag_id')
+        //     ->withCount('tag_id')
+        //     ->orderBy('tag_id', 'desc')
+        //     ->get();
+
+        return view('accountbook.index', compact('attentionTag'));
     }
 
     public function search(Request $request)
@@ -39,33 +50,17 @@ class AccountbookController extends Controller
         $user = Auth::user();
         $categories = Category::all();
         $tags = Tag::all();
-        // $accountbookQuery = Accountbook::where('user_id', $user->id);
-
-        // if (!empty($request->category_id)) {
-        //     $accountbookQuery->where('category_id', $request->category_id);
-        // }
-
-        // if (!empty($request->tags)) {
-        //     $accountbookQuery->whereHas('tags', function ($query) use ($request) {
-        //         $query->where('tags.id', $request->tags);
-        //     });
-        // }
-
-        // if (!empty($request->purcahse_date_month)) {
-        //     $accountbookQuery->whereYear('purchase_date', 2020)
-        //         ->whereMonth('purchase_date', $request->purcahse_date_month);
-        // }
-
-        // $accountbookQuery->get();
 
         return view('accountbook.search', compact('categories', 'tags'));
     }
 
     public function searchResults(Request $request)
     {
+        $user = Auth::user();
+        $accountbookQuery = Accountbook::where('user_id', $user->id);
 
         if (!empty($request->purcahse_date_month)) {
-            $accountbookQuery = Accountbook::whereYear('purchase_date', 2020)
+            $accountbookQuery->whereYear('purchase_date', 2020)
                 ->whereMonth('purchase_date', $request->purcahse_date_month);
         }
 
@@ -79,16 +74,16 @@ class AccountbookController extends Controller
             });
         }
 
-        $query = $accountbookQuery->get()
-            ->groupBy(function ($row) {
-                return $row->accountbookQuery;
-            })
-            ->map(function ($value) {
-                return $value->sum('price');
+        $accountbooks = $accountbookQuery->get();
+        $totalAmount = $accountbooks
+            ->reduce(function ($current, $item) {
+                return $current + $item->price;
             });
-        // dd($query);
 
-        return view('accountbook.searchResults', compact('query'));
+        // $posts = $query->paginate(10);
+        // dd($totalAmount);
+
+        return view('accountbook.searchResults', compact('totalAmount', 'accountbooks'));
     }
 
 
@@ -103,11 +98,12 @@ class AccountbookController extends Controller
             ->map(function ($day) {
                 return $day->sum('price');
             });
-        $accountbookList = Accountbook::whereMonth('purchase_date', $request->purcahse_date_month);
-        $accountbookList->orderBy('purchase_date', 'DESC');
-        $postsList = $accountbookList->paginate(10);
 
-        return view('accountbook.amountMonth', compact('prices', 'postsList'));
+        $accountbooks = Accountbook::whereMonth('purchase_date', $request->purcahse_date_month);
+        $accountbooks->orderBy('purchase_date', 'DESC');
+        $posts = $accountbooks->paginate(10);
+
+        return view('accountbook.amountMonth', compact('prices', 'posts'));
     }
 
     public function amountCategory(Request $request)
