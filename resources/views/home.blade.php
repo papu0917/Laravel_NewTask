@@ -1,23 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
+    <div class="container">
+        <div class="menubox-left" style="float: left; width: 245px;">
+            <dl class="areamenu areamenu--ex">
+                <dt class="ui-sprite--menu_rent" style="background-position: -386px 0px; width: 245px;height: 43px;">支出をつける
+                </dt>
+                <dd>
+                    <a href="/accountbook/create" class="btn btn-warning">支出登録</a>
+                </dd>
+            </dl>
+        </div>
+        <div class="menubox-right">
+            <div>
+                <dl class="areamenu areamenu--han">
+                    <dt class="ui-stripe--menu_search">検索する
+                </dl>
             </div>
         </div>
-    </div>
-</div>
-@endsection
+    @endsection
