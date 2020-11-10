@@ -30,7 +30,7 @@ class AccountbookController extends Controller
         $accountbooks->orderBy('purchase_date', 'DESC');
         $posts = $accountbooks->paginate(10);
 
-        return view('accountbook.index', compact('totalPrices', 'posts', 'attentionTag', 'items'));
+        return view('home', compact('totalPrices', 'posts', 'attentionTag', 'items'));
     }
 
     public function tagsCount(Request $request)
