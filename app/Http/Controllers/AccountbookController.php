@@ -89,7 +89,7 @@ class AccountbookController extends Controller
 
     public function amountMonth(Request $request)
     {
-        $prices = Accountbook::whereYear('purchase_date', 2020)
+        $totalPrices = Accountbook::whereYear('purchase_date', 2020)
             ->whereMonth('purchase_date', $request->purcahse_date_month)
             ->get()
             ->groupBy(function ($row) {
@@ -103,7 +103,7 @@ class AccountbookController extends Controller
         $accountbooks->orderBy('purchase_date', 'DESC');
         $posts = $accountbooks->paginate(10);
 
-        return view('accountbook.amountMonth', compact('prices', 'posts'));
+        return view('accountbook.index', compact('totalPrices', 'posts'));
     }
 
     public function amountCategory(Request $request)
@@ -117,7 +117,11 @@ class AccountbookController extends Controller
                 return $value->sum('price');
             });
 
-        return view('accountbook.amountCategory', compact('accountbookByCategory'));
+        $accountbooks = Accountbook::where('category_id', $request->category_id);
+        $accountbooks->orderBy('category_id', 'DESC');
+        $posts = $accountbooks->paginate(10);
+
+        return view('accountbook.amountCategory', compact('accountbookByCategory', 'posts'));
     }
 
     public function eachCategory(Request $request)

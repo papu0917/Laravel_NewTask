@@ -28,7 +28,7 @@ Route::get('accountbook/edit', 'AccountbookController@edit');
 Route::post('accountbook/edit', 'AccountbookController@update');
 Route::get('accountbook/eachYear', 'AccountbookController@eachYear');
 Route::get('accountbook/eachAmount', 'AccountbookController@eachAmount');
-Route::get('accountbook/eachAmount/amountMonth', 'AccountbookController@amountMonth');
+Route::get('accountbook/eachAmount/index', 'AccountbookController@amountMonth');
 Route::get('accountbook/eachAmount/amountCategory', 'AccountbookController@amountCategory');
 Route::get('accountbook/eachAmount/amountTag', 'AccountbookController@amountTag');
 Route::get('accountbook/search/', 'AccountbookController@search');

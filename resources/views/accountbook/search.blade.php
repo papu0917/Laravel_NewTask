@@ -1,9 +1,8 @@
-@extends('accountbook/layout')
+@extends('layouts.app')
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mx-auto">
-                <h1>絞り込み検索</h1>
+            <div class="col-md-8">
                 <form action="{{ action('AccountbookController@searchResults') }}" method="get">
                     <div class="form-group row">
                         <label class="col-md-2">月別</label>
@@ -25,14 +24,12 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">カテゴリ</label>
-                        <div class="col-md-10">
-                            <select name="category_id">
-                                <option>選択してください</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <select name="category_id">
+                            <option>選択してください</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">タグ</label>

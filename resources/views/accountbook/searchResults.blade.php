@@ -1,14 +1,14 @@
-@extends('accountbook/layout')
+@extends('layouts.app')
 @section('content')
     <div class="container">
         <div class="row">
             <h1>絞り込み検索結果</h1>
-            <p>金額は{{ $totalAmount }}円です。</p>
         </div>
+        <p>金額は{{ $totalAmount }}円です。</p>
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <table class="table table-dark table-striped">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th width="10%">ID</th>

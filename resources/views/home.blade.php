@@ -2,50 +2,90 @@
 
 @section('content')
     <div class="container">
+        <div class="priceList" style="margin-top: 10px; margin-bottom: 30px;　border-bottom: 1px solid gray;">
+            @foreach ($totalPrices as $key => $totalPrice)
+                <h1>{{ $key }}月の合計支出額は{{ $totalPrice }}円です。</h1>
+            @endforeach
+        </div>
         <div class="row">
-            <div class="col-lg-6">
-                <div class="menubox-left" style="float: left; width: 150px;">
-                    <dl class="areamenu areamenu--ex">
-                        <dt class="ui-sprite--menu_rent"
-                            style="background-position: -386px 0px; width: 245px;height: 43px;">支出をつける</dt>
-                        <dd>
-                            <a href="/accountbook/create" class="btn btn-warning">支出登録</a>
-                        </dd>
-                        <dt class="ui-stripe--menu_search" style="margin-top: 10px; height: 43px;">検索する</dt>
-                        <dd>
-
-
-                            <a href="/accountbook/eachYear" class="btn btn-warning">過去の支出一覧</a>
-
-                            <a href="/accountbook/search" class="btn btn-warning" style="margin-top: 10px;">絞り込み</a>
-
-
-                        </dd>
-                    </dl>
-                </div>
-                <div class="menubox-right">
-                    <div>
-                        <dl class="areamenu areamenu--han">
-                            <dt class="ui-stripe--menu_search" style="height: 43px;">検索する</dt>
-                            <dd>
-                                <div class="areamenu_item_group">
-                                    <div class="areamenu_item">
-                                        <ul>
-                                            <li style="list-style: none;">
-                                                <a href="/accountbook/eachYear" class="btn btn-warning">過去の支出一覧</a>
-                                            </li>
-                                            <li style="list-style: none;">
-                                                <a href="/accountbook/search" class="btn btn-warning"
-                                                    style="margin-top: 10px;">絞り込み</a>
-                                            </li>
-                                        </ul>
+            <div class="col-lg-9">
+                <table class="table-striped">
+                    <thead>
+                        <tr>
+                            <th width="10%">ID</th>
+                            <th width="15%">購入日</th>
+                            <th width="15%">購入品</th>
+                            <th width="15%">金額</th>
+                            <th width="15%">カテゴリ</th>
+                            <th width="15%">タグ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($posts as $accountbook)
+                            <tr>
+                                <th>{{ $accountbook->id }}</th>
+                                <th>{{ $accountbook->purchase_date->format('Y-m-d') }}</th>
+                                <td>{{ \Str::limit($accountbook->title, 100) }}</td>
+                                <td>{{ $accountbook->price }} 円</td>
+                                <td>{{ $accountbook->category->name }}</td>
+                                <td>
+                                    @foreach ($accountbook->tags as $tag)
+                                        {{ $tag->name }}
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <div><a href="{{ action('AccountbookController@edit', ['id' => $accountbook->id]) }}"
+                                            class="btn btn-success">編集</a>
+                                        <a href="{{ action('AccountbookController@delete', ['id' => $accountbook->id]) }}"
+                                            class="btn btn-danger">削除</a>
                                     </div>
-                                </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="menubox-left" style="width: 150px;">
+                        <dl class="areamenu areamenu--ex">
+                            <dt class="ui-sprite--menu_rent"
+                                style="background-position: -386px 0px; width: 245px;height: 43px;">支出をつける</dt>
+                            <dd>
+                                <a href="/accountbook/create" class="btn btn-warning">支出登録</a>
+                            </dd>
+                            <dt class="ui-stripe--menu_search" style="margin-top: 10px; height: 43px;">検索する</dt>
+                            <dd>
+                                <a href="/accountbook/eachYear" class="btn btn-warning">過去の支出一覧</a>
+                                <a href="/accountbook/search" class="btn btn-warning" style="margin-top: 10px;">絞り込み</a>
                             </dd>
                         </dl>
                     </div>
+                    {{-- <div class="menubox-right">
+                        <div>
+                            <dl class="areamenu areamenu--han">
+                                <dt class="ui-stripe--menu_search" style="height: 43px;">検索する</dt>
+                                <dd>
+                                    <div class="areamenu_item_group">
+                                        <div class="areamenu_item">
+                                            <ul>
+                                                <li style="list-style: none;">
+                                                    <a href="/accountbook/eachYear" class="btn btn-warning">過去の支出一覧</a>
+                                                </li>
+                                                <li style="list-style: none;">
+                                                    <a href="/accountbook/search" class="btn btn-warning"
+                                                        style="margin-top: 10px;">絞り込み</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div> --}}
                 </div>
             </div>
+            {{ $posts->links() }}
         </div>
     </div>
 @endsection
