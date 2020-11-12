@@ -61,31 +61,9 @@
                             </dd>
                         </dl>
                     </div>
-                    {{-- <div class="menubox-right">
-                        <div>
-                            <dl class="areamenu areamenu--han">
-                                <dt class="ui-stripe--menu_search" style="height: 43px;">検索する</dt>
-                                <dd>
-                                    <div class="areamenu_item_group">
-                                        <div class="areamenu_item">
-                                            <ul>
-                                                <li style="list-style: none;">
-                                                    <a href="/accountbook/eachYear" class="btn btn-warning">過去の支出一覧</a>
-                                                </li>
-                                                <li style="list-style: none;">
-                                                    <a href="/accountbook/search" class="btn btn-warning"
-                                                        style="margin-top: 10px;">絞り込み</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
-            {{ $posts->links() }}
         </div>
+        {{ $posts->links() }}
     </div>
 @endsection

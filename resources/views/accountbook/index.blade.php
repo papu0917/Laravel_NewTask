@@ -1,10 +1,7 @@
 @extends('layouts.app')
+
 @section('content')
     <div class="container">
-        {{-- <div class="header" style="background-color: #26d0c9;height: 90px; color: #fff;">
-            <div class=" header-logo" style="float: left; font-size: 36px; padding: 20px 40px;">支出一覧</div>
-            <div class="header-list" style="float: left; padding: 33px 20px;"></div>
-        </div> --}}
         <div class="main" style="padding: 30px 30px;">
             @foreach ($totalPrices as $key => $totalPrice)
                 <h1>{{ $key }}月の合計支出額は{{ $totalPrice }}円です。</h1>
@@ -23,7 +20,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($posts as $accountbook)
+                            @foreach ($accountbooks as $accountbook)
                                 <tr>
                                     <th>{{ $accountbook->id }}</th>
                                     <th>{{ $accountbook->purchase_date->format('Y-m-d') }}</th>
@@ -48,7 +45,6 @@
                     </table>
                 </div>
             </div>
-            {{ $posts->links() }}
         </div>
     </div>
 @endsection

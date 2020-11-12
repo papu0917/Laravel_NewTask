@@ -3,7 +3,6 @@
     <div class="container">
         <div class="row">
             <h1>2020年</h1>
-            {{-- <p>2020年の支出合計は{{ $totalAmountYear }} 円です</p> --}}
         </div>
         <div class="month_search">
             <form action="{{ action('AccountbookController@amountMonth') }}" method="get">

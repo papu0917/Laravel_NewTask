@@ -33,17 +33,6 @@ class AccountbookController extends Controller
         return view('home', compact('totalPrices', 'posts', 'attentionTag', 'items'));
     }
 
-    public function tagsCount(Request $request)
-    {
-        // //withCountメソッドでリレーションの数を取得
-        // $attentionTag = Tag::where('tag_id')
-        //     ->withCount('tag_id')
-        //     ->orderBy('tag_id', 'desc')
-        //     ->get();
-
-        return view('accountbook.index', compact('attentionTag'));
-    }
-
     public function search(Request $request)
     {
 
@@ -80,9 +69,6 @@ class AccountbookController extends Controller
                 return $current + $item->price;
             });
 
-        // $posts = $query->paginate(10);
-        // dd($totalAmount);
-
         return view('accountbook.searchResults', compact('totalAmount', 'accountbooks'));
     }
 
@@ -99,11 +85,9 @@ class AccountbookController extends Controller
                 return $day->sum('price');
             });
 
-        $accountbooks = Accountbook::whereMonth('purchase_date', $request->purcahse_date_month);
-        $accountbooks->orderBy('purchase_date', 'DESC');
-        $posts = $accountbooks->paginate(10);
+        $accountbooks = Accountbook::whereMonth('purchase_date', $request->purcahse_date_month)->get();
 
-        return view('accountbook.index', compact('totalPrices', 'posts'));
+        return view('accountbook.index', compact('totalPrices', 'accountbooks'));
     }
 
     public function amountCategory(Request $request)
@@ -117,15 +101,10 @@ class AccountbookController extends Controller
                 return $value->sum('price');
             });
 
-        $accountbooks = Accountbook::where('category_id', $request->category_id);
-        $accountbooks->orderBy('category_id', 'DESC');
-        $posts = $accountbooks->paginate(10);
+        $accountbooks = Accountbook::where('category_id', $request->category_id)
+            ->get();
 
-        return view('accountbook.amountCategory', compact('accountbookByCategory', 'posts'));
-    }
-
-    public function eachCategory(Request $request)
-    {
+        return view('accountbook.amountCategory', compact('accountbookByCategory', 'accountbooks'));
     }
 
     public function amountTag(Request $request)
@@ -139,7 +118,6 @@ class AccountbookController extends Controller
             ->map(function ($value) {
                 return $value->sum('price');
             });
-        // dd($accountbookByTag);
 
         return view('accountbook.amountTag', compact('accountbookByTag'));
     }
@@ -163,7 +141,6 @@ class AccountbookController extends Controller
                 return $day->sum('price');
             })
             ->pop();
-        // dd($totalEachAmount);
 
         $totalAmountYear = Accountbook::whereYear('purchase_date', 2020)
             ->get()
@@ -195,7 +172,7 @@ class AccountbookController extends Controller
         $accountbook->save();
         $accountbook->tags()->attach($request->tags);
 
-        return redirect('accountbook');
+        return redirect('home');
     }
 
     public function edit(Request $request)

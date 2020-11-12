@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($posts as $accountbook)
+                        @foreach ($accountbooks as $accountbook)
                             <tr>
                                 <th>{{ $accountbook->id }}</th>
                                 <th>{{ $accountbook->purchase_date->format('Y-m-d') }}</th>
