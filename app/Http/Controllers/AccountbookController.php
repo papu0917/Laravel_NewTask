@@ -119,7 +119,13 @@ class AccountbookController extends Controller
                 return $value->sum('price');
             });
 
-        return view('accountbook.amountTag', compact('accountbookByTag'));
+        $amountTagList = Accountbook::whereHas('tags', function ($query) use ($request) {
+            $query->where('tags.id', $request->tags);
+        });
+
+        $results = $amountTagList->get();
+
+        return view('accountbook.amountTag', compact('accountbookByTag', 'results'));
     }
 
     public function eachYear(Request $request)

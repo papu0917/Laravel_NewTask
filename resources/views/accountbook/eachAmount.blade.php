@@ -6,7 +6,7 @@
         </div>
         <div class="month_search">
             <form action="{{ action('AccountbookController@amountMonth') }}" method="get">
-                <label class="col-md-2">月別</label>
+                <label class="col-md-2">月別合計</label>
                 <div>
                     <select name="purcahse_date_month">
                         <option>選択してください</option>
@@ -29,7 +29,7 @@
         </div>
         <div class="category_search">
             <form action="{{ action('AccountbookController@amountCategory') }}" method="get">
-                <label class="col-md-2">カテゴリ別</label>
+                <label class="col-md-2">カテゴリ別合計</label>
                 <div>
                     <select name="category_id">
                         <option>選択してください</option>
@@ -42,7 +42,7 @@
             </form>
         </div>
         <form action="{{ action('AccountbookController@amountTag') }}" method="get">
-            <label class="col-md-2">タグ別</label>
+            <label class="col-md-2">タグ別合計</label>
             <div>
                 @foreach ($eachTag as $tag)
                     <input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->name }}
