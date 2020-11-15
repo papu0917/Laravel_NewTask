@@ -3,9 +3,7 @@
 @section('content')
     <div class="container">
         <div class="priceList" style="margin-top: 10px; margin-bottom: 30px;　border-bottom: 1px solid gray;">
-            @foreach ($totalPrices as $key => $totalPrice)
-                <h1>{{ $key }}月の合計支出額は{{ $totalPrice }}円です。</h1>
-            @endforeach
+            <h1>{{ $now->format('Y年m月') }}の合計支出額は{{ $totalPriceThisMonth }}円です。</h1>
         </div>
         <div class="row">
             <div class="col-lg-9">
@@ -21,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($posts as $accountbook)
+                        @foreach ($accountbooks as $accountbook)
                             <tr>
                                 <th>{{ $accountbook->id }}</th>
                                 <th>{{ $accountbook->purchase_date->format('Y-m-d') }}</th>
@@ -64,6 +62,6 @@
                 </div>
             </div>
         </div>
-        {{ $posts->links() }}
+        {{ $accountbooks->links() }}
     </div>
 @endsection

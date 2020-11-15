@@ -2,35 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Accountbook;
 use App\Category;
 use App\Tag;
-use App\User;
 use Carbon\Carbon;
 use Auth;
 
 class AccountbookController extends Controller
 {
-    public function index(Request $request)
+    public function home(Request $request)
     {
+        $user = Auth::user();
+        $now = Carbon::now();
+        $accountbookQuery = Accountbook::buildQueryByUser($user, $now);
 
-        $totalPrices = Accountbook::whereYear('purchase_date', 2020)
-            ->whereMonth('purchase_date', Carbon::now())
-            ->get()
+        $totalPrices = $accountbookQuery->get()
             ->groupBy(function ($row) {
-                return $row->purchase_date->format('m');
+                return $row->purchase_date->format('Y-m');
             })
             ->map(function ($day) {
                 return $day->sum('price');
             });
+        $totalPriceThisMonth = $totalPrices->get($now->format('Y-m'));
+        // $totalPriceThisMonth = $totalPrices[$now->format('Y-m')];
+        $accountbooks = $accountbookQuery->paginate(10);
 
-        $accountbooks = Accountbook::whereMonth('purchase_date', Carbon::now());
-        $accountbooks->orderBy('purchase_date', 'DESC');
-        $posts = $accountbooks->paginate(10);
-
-        return view('home', compact('totalPrices', 'posts', 'attentionTag', 'items'));
+        return view('home', compact('totalPriceThisMonth', 'accountbooks', 'now'));
     }
 
     public function search(Request $request)

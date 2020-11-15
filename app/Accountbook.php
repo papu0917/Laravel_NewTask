@@ -23,4 +23,13 @@ class Accountbook extends Model
     {
         return $this->belongsToMany('App\Tag', 'accountbook_tag');
     }
+
+    public static function buildQueryByUser($user, $now)
+    {
+        $accountbookQuery = self::where('user_id', $user->id)
+            ->whereYear('purchase_date', $now)
+            // ->whereMonth('purchase_date', $now)
+            ->orderBy('purchase_date', 'DESC');
+        return $accountbookQuery;
+    }
 }

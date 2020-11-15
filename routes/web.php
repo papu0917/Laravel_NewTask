@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home', 'AccountbookController@index');
+Route::get('/home', 'AccountbookController@home');
 Route::get('accountbook/create', 'AccountbookController@add');
 Route::post('accountbook/create', 'AccountbookController@create');
 Route::get('accountbook/delete', 'AccountbookController@delete');
