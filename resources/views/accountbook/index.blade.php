@@ -3,9 +3,7 @@
 @section('content')
     <div class="container">
         <div class="main" style="padding: 30px 30px;">
-            @foreach ($totalPrices as $key => $totalPrice)
-                <h1>2020年{{ $key }}月の合計支出額は{{ $totalPrice }}円です。</h1>
-            @endforeach
+            <h1>2020年の合計支出額は{{ $totalPriceThisMonth }}円です。</h1>
             <div class="col-md-12">
                 <div class="row">
                     <table class="table table-striped">

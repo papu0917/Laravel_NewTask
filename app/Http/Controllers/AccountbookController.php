@@ -73,19 +73,22 @@ class AccountbookController extends Controller
 
     public function amountMonth(Request $request)
     {
-        $totalPrices = Accountbook::whereYear('purchase_date', 2020)
-            ->whereMonth('purchase_date', $request->purcahse_date_month)
-            ->get()
+        $user = Auth::user();
+        $accountbookQuery = Accountbook::totalAmountPrice($user);
+
+        $totalPrices = $accountbookQuery->get()
+            // ->whereMonth('purchase_date', $request->purcahse_date_month)
             ->groupBy(function ($row) {
-                return $row->purchase_date->format('m');
+                return $row->purchase_date->format('Y-m');
             })
             ->map(function ($day) {
                 return $day->sum('price');
             });
+        $totalPriceThisMonth = $totalPrices;
+        // $totalPriceThisMonth = $totalPrices[$now->format('Y-m')];
+        $accountbooks = $accountbookQuery->paginate(10);
 
-        $accountbooks = Accountbook::whereMonth('purchase_date', $request->purcahse_date_month)->get();
-
-        return view('accountbook.index', compact('totalPrices', 'accountbooks'));
+        return view('accountbook.index', compact('totalPriceThisMonth', 'accountbooks', 'now'));
     }
 
     public function amountCategory(Request $request)

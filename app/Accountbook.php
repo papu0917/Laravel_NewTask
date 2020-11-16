@@ -32,4 +32,12 @@ class Accountbook extends Model
             ->orderBy('purchase_date', 'DESC');
         return $accountbookQuery;
     }
+
+    public static function totalAmountPrice($user)
+    {
+        $accountbookQuery = self::where('user_id', $user->id)
+            ->whereYear('purchase_date', 2020)
+            ->orderBy('purchase_date', 'DESC');
+        return $accountbookQuery;
+    }
 }
