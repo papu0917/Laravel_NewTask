@@ -66,7 +66,7 @@
                             <input type="hidden" name="id" value="{{ $accountbook->id }}">
                             {{ csrf_field() }}
                             <input type="submit" class="btn btn-primary" value="更新">
-                            <a href="{{ action('AccountbookController@index') }}" role="button"
+                            <a href="{{ action('AccountbookController@home') }}" role="button"
                                 class="btn btn-primary">戻る</a>
                         </div>
                     </div>

@@ -33,11 +33,26 @@ class Accountbook extends Model
         return $accountbookQuery;
     }
 
-    public static function totalAmountPrice($user)
+    public static function totalAmountPrice($user, $request)
     {
         $accountbookQuery = self::where('user_id', $user->id)
             ->whereYear('purchase_date', 2020)
+            ->whereMonth('purchase_date', $request->purcahse_date_month)
             ->orderBy('purchase_date', 'DESC');
         return $accountbookQuery;
+    }
+
+    public static function totalAmountCategory($user, $request)
+    {
+        $accountbookByCategory = self::where('user_id', $user->id)
+            ->where('category_id', $request->category_id)
+            ->orderBy('category_id', 'DESC');
+        return $accountbookByCategory;
+    }
+
+    public static function totalAmountTag($user)
+    {
+        $accountbookByTag = self::where('user_id', $user->id);
+        return $accountbookByTag;
     }
 }

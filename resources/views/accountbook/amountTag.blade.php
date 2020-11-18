@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            @foreach ($accountbookByTag as $key => $amountTag)
+            @foreach ($accountbookPrice as $key => $amountTag)
                 <h1>2020年の合計支出額は{{ $amountTag }}円です。</h1>
             @endforeach
         </div>
