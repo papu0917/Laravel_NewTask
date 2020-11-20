@@ -56,9 +56,3 @@ class Accountbook extends Model
         return $accountbookByTag;
     }
 }
-
-// CLEARDB_DATABASE_URL:
-// mysql: //bf9e01a41c1c3a:8e667554@us-cdbr-east-02.cleardb.com/heroku_146e188c3a77c93?reconnect=true
-// CLEARDB_NAVY_URL:
-// mysql://b88c95fbd65f9d:faca93ea@us-cdbr-east-02.cleardb.com/heroku_32c95f6e1727cfb?reconnect=true
-// mysql://bf9e01a41c1c3a:8e667554@us-cdbr-east-02.cleardb.com/heroku_146e188c3a77c93?reconnect=true
