@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <form action="{{ action('AccountbookController@searchResults') }}" method="get">
+                <form action="{{ route('accountbook.search.searchResults') }}" method="get">
                     <div class="form-group row">
                         <label class="col-md-2">月別</label>
                         <select name="purcahse_date_month">

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>カテゴリの編集</h2>
-                <form action="{{ action('CategoryController@update') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('category.edit') }}" method="post" enctype="multipart/form-data">
 
                     @if (count($errors) > 0)
                         <ul>
@@ -24,7 +24,7 @@
                             <input type="hidden" name="id" value="{{ $category->id }}">
                             {{ csrf_field() }}
                             <input type="submit" class="btn btn-primary" value="更新">
-                            <a href="{{ action('CategoryController@index') }}" role="button" class="btn btn-primary">戻る</a>
+                            <a href="{{ route('category.index') }}" role="button" class="btn btn-primary">戻る</a>
                         </div>
                     </div>
                 </form>

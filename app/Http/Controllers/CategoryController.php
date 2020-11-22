@@ -28,7 +28,7 @@ class CategoryController extends Controller
         $category->fill($form);
         $category->save();
 
-        return redirect('category');
+        return redirect('category/index');
     }
 
     public function edit(Request $request)
@@ -46,7 +46,7 @@ class CategoryController extends Controller
 
         $category->fill($category_form)->save();
 
-        return redirect('category');
+        return redirect('category/index');
     }
 
     public function delete(Request $request)
@@ -54,6 +54,6 @@ class CategoryController extends Controller
         $category = Category::find($request->id);
         $category->delete();
 
-        return redirect('category');
+        return redirect('category/index');
     }
 }

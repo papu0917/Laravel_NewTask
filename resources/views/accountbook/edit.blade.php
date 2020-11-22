@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>購入品の編集</h2>
-                <form action="{{ action('AccountbookController@update') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('accountbook.edit') }}" method="post" enctype="multipart/form-data">
 
                     @if (count($errors) > 0)
                         <ul>
@@ -66,8 +66,7 @@
                             <input type="hidden" name="id" value="{{ $accountbook->id }}">
                             {{ csrf_field() }}
                             <input type="submit" class="btn btn-primary" value="更新">
-                            <a href="{{ action('AccountbookController@home') }}" role="button"
-                                class="btn btn-primary">戻る</a>
+                            <a href="{{ route('accountbook.home') }}" role="button" class="btn btn-primary">戻る</a>
                         </div>
                     </div>
                 </form>

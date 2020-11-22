@@ -20,12 +20,10 @@
                                     <th>{{ $category->id }}</th>
                                     <th>{{ $category->name }}</th>
                                     <td>
-                                        <div><a
-                                                href="{{ action('CategoryController@edit', ['id' => $category->id]) }}">編集</a>
+                                        <div><a href="{{ route('category.edit', ['id' => $category->id]) }}">編集</a>
 
                                         </div>
-                                        <div><a
-                                                href="{{ action('CategoryController@delete', ['id' => $category->id]) }}">削除</a>
+                                        <div><a href="{{ route('category.delete', ['id' => $category->id]) }}">削除</a>
 
                                         </div>
                                     </td>

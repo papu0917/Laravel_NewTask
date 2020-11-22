@@ -35,7 +35,7 @@
                                     <div>
                                         <a href="{{ route('accountbook.edit', ['id' => $accountbook->id]) }}"
                                             class="btn btn-success">編集</a>
-                                        <a href="{{ action('AccountbookController@delete', ['id' => $accountbook->id]) }}"
+                                        <a href="{{ route('accountbook.delete', ['id' => $accountbook->id]) }}"
                                             class="btn btn-danger">削除</a>
                                     </div>
                                 </td>
@@ -51,12 +51,13 @@
                             <dt class="ui-sprite--menu_rent"
                                 style="background-position: -386px 0px; width: 245px;height: 43px;">支出をつける</dt>
                             <dd>
-                                <a href="/accountbook/create" class="btn btn-warning">支出登録</a>
+                                <a href="{{ route('accountbook.create') }}" class="btn btn-warning">支出登録</a>
                             </dd>
                             <dt class="ui-stripe--menu_search" style="margin-top: 10px; height: 43px;">検索する</dt>
                             <dd>
-                                <a href="/accountbook/eachYear" class="btn btn-warning">過去の支出一覧</a>
-                                <a href="/accountbook/search" class="btn btn-warning" style="margin-top: 10px;">絞り込み</a>
+                                <a href="{{ route('accountbook.eachYear') }}" class="btn btn-warning">過去の支出一覧</a>
+                                <a href="{{ route('accountbook.search') }}" class="btn btn-warning"
+                                    style="margin-top: 10px;">絞り込み</a>
                             </dd>
                         </dl>
                     </div>

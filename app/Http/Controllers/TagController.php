@@ -27,7 +27,7 @@ class TagController extends Controller
         $tag->fill($form);
         $tag->save();
 
-        return redirect('tag');
+        return redirect('tag/index');
     }
 
     public function edit(Request $request)
@@ -45,7 +45,7 @@ class TagController extends Controller
 
         $tag->fill($tag_form)->save();
 
-        return redirect('tag');
+        return redirect('tag/index');
     }
 
     public function delete(Request $request)
@@ -53,6 +53,6 @@ class TagController extends Controller
         $tag = Tag::find($request->id);
         $tag->delete();
 
-        return redirect('tag');
+        return redirect('tag/index');
     }
 }

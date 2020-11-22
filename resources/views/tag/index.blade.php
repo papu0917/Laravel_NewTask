@@ -20,10 +20,10 @@
                                     <th>{{ $tag->id }}</th>
                                     <th>{{ $tag->name }}</th>
                                     <td>
-                                        <div><a href="{{ action('TagController@edit', ['id' => $tag->id]) }}">編集</a>
+                                        <div><a href="{{ route('tag.edit', ['id' => $tag->id]) }}">編集</a>
 
                                         </div>
-                                        <div><a href="{{ action('TagController@delete', ['id' => $tag->id]) }}">削除</a>
+                                        <div><a href="{{ route('tag.delete', ['id' => $tag->id]) }}">削除</a>
 
                                         </div>
                                     </td>
@@ -31,7 +31,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div><a href="/tag/create" class="btn btn-default">新規作成</a></div>
+                    <div><a href="{{ route('tag.create') }}" class="btn btn-default">新規作成</a></div>
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@
             <h1>2020年</h1>
         </div>
         <div class="month_search">
-            <form action="{{ action('AccountbookController@amountMonth') }}" method="get">
+            <form action="{{ route('accountbook.eachAmount.index') }}" method="get">
                 <label class="col-md-2">月別合計</label>
                 <div>
                     <select name="purcahse_date_month">
@@ -28,7 +28,7 @@
             </form>
         </div>
         <div class="category_search">
-            <form action="{{ action('AccountbookController@amountCategory') }}" method="get">
+            <form action="{{ route('accountbook.eachAmount.amountCategory') }}" method="get">
                 <label class="col-md-2">カテゴリ別合計</label>
                 <div>
                     <select name="category_id">
@@ -41,7 +41,7 @@
                 </div>
             </form>
         </div>
-        <form action="{{ action('AccountbookController@amountTag') }}" method="get">
+        <form action="{{ route('accountbook.eachAmount.amountTag') }}" method="get">
             <label class="col-md-2">タグ別合計</label>
             <div>
                 @foreach ($eachTag as $tag)
