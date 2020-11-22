@@ -19,21 +19,26 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+// Route::get('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home', 'AccountbookController@home');
-Route::get('accountbook/create', 'AccountbookController@add');
-Route::post('accountbook/create', 'AccountbookController@create');
-Route::get('accountbook/delete', 'AccountbookController@delete');
-Route::get('accountbook/edit', 'AccountbookController@edit');
-Route::post('accountbook/edit', 'AccountbookController@update');
-Route::get('accountbook/eachYear', 'AccountbookController@eachYear');
-Route::get('accountbook/eachAmount', 'AccountbookController@eachAmount');
-Route::get('accountbook/eachAmount/index', 'AccountbookController@amountMonth');
-Route::get('accountbook/eachAmount/amountCategory', 'AccountbookController@amountCategory');
-Route::get('accountbook/eachAmount/amountTag', 'AccountbookController@amountTag');
-Route::get('accountbook/search/', 'AccountbookController@search');
-Route::get('accountbook/search/searchResults', 'AccountbookController@searchResults');
+
+Route::group(['prefix' => 'accountbook'], function () {
+    Route::get('home', 'AccountbookController@home')->name('accountbook.home');
+    Route::get('create', 'AccountbookController@add');
+    Route::post('create', 'AccountbookController@create');
+    Route::get('delete', 'AccountbookController@delete');
+    Route::get('edit', 'AccountbookController@edit')->name('accountbook.edit');
+    Route::post('edit', 'AccountbookController@update');
+    Route::get('eachYear', 'AccountbookController@eachYear');
+    Route::get('eachAmount', 'AccountbookController@eachAmount');
+    Route::get('eachAmount/index', 'AccountbookController@amountMonth');
+    Route::get('eachAmount/amountCategory', 'AccountbookController@amountCategory');
+    Route::get('eachAmount/amountTag', 'AccountbookController@amountTag');
+    Route::get('search/', 'AccountbookController@search');
+    Route::get('search/searchResults', 'AccountbookController@searchResults');
+});
+
 
 Route::get('category/create', 'CategoryController@add');
 Route::post('category/create', 'CategoryController@create');
