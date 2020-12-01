@@ -70,7 +70,6 @@ class AccountbookController extends Controller
         return view('accountbook.searchResults', compact('totalAmount', 'accountbooks'));
     }
 
-
     public function amountMonth(Request $request)
     {
         $user = Auth::user();
@@ -134,7 +133,7 @@ class AccountbookController extends Controller
         return view('accountbook.amountTag', compact('accountbookByTag', 'results', 'accountbooks', 'accountbooks', 'accountbookPrice'));
     }
 
-    public function eachYear(Request $request)
+    public function eachYear()
     {
         return view('accountbook.eachYear');
     }
@@ -152,7 +151,7 @@ class AccountbookController extends Controller
         $tags = Tag::all();
         $categories = Category::all();
 
-        return view('accountbook.create', compact('categories', 'tags'));
+        return view('accountbook.create', compact('categories', 'tags', 'accountbook'));
     }
 
     public function create(Request $request)

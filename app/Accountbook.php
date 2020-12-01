@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Accountbook extends Model
 {
-    protected $fillable = [   // <---　追加
+    protected $fillable = [
         'user_id', 'title', 'price', 'id', 'purchase_date', 'category_id', 'tag_id',
     ];
 
@@ -28,7 +28,7 @@ class Accountbook extends Model
     {
         $accountbookQuery = self::where('user_id', $user->id)
             ->whereYear('purchase_date', $now)
-            // ->whereMonth('purchase_date', $now)
+            ->whereMonth('purchase_date', $now)
             ->orderBy('purchase_date', 'DESC');
         return $accountbookQuery;
     }

@@ -14,38 +14,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'accountbook'], function () {
-    Route::get('home', 'AccountbookController@home')->name('accountbook.home');
-    Route::get('create', 'AccountbookController@add')->name('accountbook.create');
-    Route::post('create', 'AccountbookController@create')->name('accountbook.create');
-    Route::get('delete', 'AccountbookController@delete')->name('accountbook.delete');
-    Route::get('edit', 'AccountbookController@edit')->name('accountbook.edit');
-    Route::post('edit', 'AccountbookController@update')->name('accountbook.edit');
-    Route::get('eachYear', 'AccountbookController@eachYear')->name('accountbook.eachYear');
-    Route::get('eachAmount', 'AccountbookController@eachAmount')->name('accountbook.eachAmount');
-    Route::get('eachAmount/index', 'AccountbookController@amountMonth')->name('accountbook.eachAmount.index');
-    Route::get('eachAmount/amountCategory', 'AccountbookController@amountCategory')->name('accountbook.eachAmount.amountCategory');
-    Route::get('eachAmount/amountTag', 'AccountbookController@amountTag')->name('accountbook.eachAmount.amountTag');
-    Route::get('search/', 'AccountbookController@search')->name('accountbook.search');
-    Route::get('search/searchResults', 'AccountbookController@searchResults')->name('accountbook.search.searchResults');
+Route::prefix('accountbook')->name('accountbook.')->group(function () {
+    Route::get('/', 'AccountbookController@home')->name('home');
+    Route::get('create', 'AccountbookController@add')->name('create');
+    Route::post('create', 'AccountbookController@create')->name('create');
+    Route::get('delete', 'AccountbookController@delete')->name('delete');
+    Route::get('edit', 'AccountbookController@edit')->name('edit');
+    Route::post('edit', 'AccountbookController@update')->name('edit');
+    Route::get('eachYear', 'AccountbookController@eachYear')->name('eachYear');
+    Route::get('eachAmount', 'AccountbookController@eachAmount')->name('eachAmount');
+    Route::get('eachAmount/index', 'AccountbookController@amountMonth')->name('eachAmount.index');
+    Route::get('eachAmount/amountCategory', 'AccountbookController@amountCategory')->name('eachAmount.amountCategory');
+    Route::get('eachAmount/amountTag', 'AccountbookController@amountTag')->name('eachAmount.amountTag');
+    Route::get('search', 'AccountbookController@search')->name('search');
+    Route::get('search/searchResults', 'AccountbookController@searchResults')->name('search.searchResults');
 });
 
-Route::group(['prefix' => 'category'], function () {
-    Route::get('create', 'CategoryController@add')->name('category.create');
-    Route::post('create', 'CategoryController@create')->name('category.create');
-    Route::get('index', 'CategoryController@index')->name('category.index');
-    Route::get('edit', 'CategoryController@edit')->name('category.edit');
-    Route::post('edit', 'CategoryController@update')->name('category.edit');
-    Route::get('delete', 'CategoryController@delete')->name('category.delete');
+Route::prefix('category')->name('category.')->group(function () {
+    Route::get('create', 'CategoryController@add')->name('create');
+    Route::post('create', 'CategoryController@create')->name('create');
+    Route::get('index', 'CategoryController@index')->name('index');
+    Route::get('edit', 'CategoryController@edit')->name('edit');
+    Route::post('edit', 'CategoryController@update')->name('edit');
+    Route::get('delete', 'CategoryController@delete')->name('delete');
 });
 
-Route::group(['prefix' => 'tag'], function () {
-    Route::get('tag/create', 'TagController@add')->name('tag.create');
-    Route::post('tag/create', 'TagController@create')->name('tag.create');
-    Route::get('index', 'TagController@index')->name('tag.index');
-    Route::get('tag/edit', 'TagController@edit')->name('tag.edit');
-    Route::post('tag/edit', 'TagController@update')->name('tag.edit');
-    Route::get('tag/delete', 'TagController@delete')->name('tag.delete');
+Route::prefix('tag')->name('tag.')->group(function () {
+    Route::get('create', 'TagController@add')->name('create');
+    Route::post('create', 'TagController@create')->name('create');
+    Route::get('index', 'TagController@index')->name('index');
+    Route::get('edit', 'TagController@edit')->name('edit');
+    Route::post('edit', 'TagController@update')->name('edit');
+    Route::get('delete', 'TagController@delete')->name('delete');
 });
 
 
