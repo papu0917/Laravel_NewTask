@@ -4,6 +4,10 @@
     <div class="container">
         <div class="priceList" style="margin-top: 10px; margin-bottom: 30px;　border-bottom: 1px solid gray;">
             <h1>{{ $now->format('Y年m月') }}の合計支出額は{{ $totalPriceThisMonth }}円です。</h1>
+            <script>
+                document.write("こんにちは");
+
+            </script>
         </div>
         <div class="row">
             <div class="col-lg-9">
