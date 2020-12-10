@@ -43,13 +43,14 @@
                     <div class="form-group row">
                         <label class="col-md-2">タグ</label>
                         <div class="col-md-10">
-                            @foreach ($tags as $tag)
+                            @foreach ($accountbookByTags as $tag)
                                 <input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->name }}
                             @endforeach
                         </div>
                     </div>
                     {{ csrf_field() }}
                     <input type="submit" class="btn btn-primary" value="登録">
+                    <a href="{{ route('accountbook.home') }}" role="button" class="btn btn-primary">戻る</a>
                 </form>
             </div>
         </div>

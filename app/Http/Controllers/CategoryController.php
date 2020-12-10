@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Accountbook;
 use Auth;
 
 class CategoryController extends Controller
 {
     public function index(Request $request)
     {
+        // $user = Auth::user();
+        // $categories = Accountbook::where('user_id', $user->id);
+        // $categories = Category::where('name', $request->name);
         $categories = Category::all();
 
         return view('category.index', compact('categories'));
@@ -26,6 +30,7 @@ class CategoryController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $category->fill($form);
+        // $category->category_id = Auth::id();
         $category->save();
 
         return redirect('category/index');

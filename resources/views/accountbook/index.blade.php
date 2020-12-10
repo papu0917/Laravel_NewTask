@@ -32,13 +32,6 @@
                                             {{ $tag->name }}
                                         @endforeach
                                     </td>
-                                    <td>
-                                        <div><a href="{{ action('AccountbookController@edit', ['id' => $accountbook->id]) }}"
-                                                class="btn btn-success">編集</a>
-                                            <a href="{{ action('AccountbookController@delete', ['id' => $accountbook->id]) }}"
-                                                class="btn btn-danger">削除</a>
-                                        </div>
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

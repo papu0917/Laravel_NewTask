@@ -140,6 +140,7 @@ class AccountbookController extends Controller
 
     public function eachAmount(Request $request)
     {
+
         $eachTag = Tag::all();;
         $eachCategory = Category::all();
 
@@ -148,10 +149,12 @@ class AccountbookController extends Controller
 
     public function add()
     {
-        $tags = Tag::all();
+        $user = Auth::user();
+        $accountbookByTags = Accountbook::where('user_id', $user->id);
+        $accountbookByTags = Tag::all();
         $categories = Category::all();
 
-        return view('accountbook.create', compact('categories', 'tags'));
+        return view('accountbook.create', compact('categories', 'accountbookByTags'));
     }
 
     public function create(Request $request)

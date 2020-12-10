@@ -53,9 +53,15 @@
                     <div class="menubox-left" style="width: 150px;">
                         <dl class="areamenu areamenu--ex">
                             <dt class="ui-sprite--menu_rent"
-                                style="background-position: -386px 0px; width: 245px;height: 43px;">支出をつける</dt>
+                                style="background-position: -386px 0px; width: 245px;height: 43px;">登録する</dt>
                             <dd>
                                 <a href="{{ route('accountbook.create') }}" class="btn btn-warning">支出登録</a>
+                            </dd>
+                            <dd>
+                                <a href="{{ route('category.index') }}" class="btn btn-warning">カテゴリ登録</a>
+                            </dd>
+                            <dd>
+                                <a href="{{ route('tag.index') }}" class="btn btn-warning">タグ登録</a>
                             </dd>
                             <dt class="ui-stripe--menu_search" style="margin-top: 10px; height: 43px;">検索する</dt>
                             <dd>

@@ -21,6 +21,7 @@
                     </div>
                     {{ csrf_field() }}
                     <input type="submit" class="btn btn-primary" value="登録">
+                    <a href="{{ route('category.index') }}" role="button" class="btn btn-primary">戻る</a>
                 </form>
             </div>
         </div>

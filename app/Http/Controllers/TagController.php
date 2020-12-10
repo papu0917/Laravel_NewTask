@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tag;
+use Auth;
 
 class TagController extends Controller
 {
@@ -25,6 +26,7 @@ class TagController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $tag->fill($form);
+        // $tag->user_id = Auth::id();
         $tag->save();
 
         return redirect('tag/index');
