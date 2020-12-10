@@ -151,7 +151,7 @@ class AccountbookController extends Controller
         $tags = Tag::all();
         $categories = Category::all();
 
-        return view('accountbook.create', compact('categories', 'tags', 'accountbook'));
+        return view('accountbook.create', compact('categories', 'tags'));
     }
 
     public function create(Request $request)
