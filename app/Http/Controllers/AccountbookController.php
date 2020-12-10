@@ -86,7 +86,7 @@ class AccountbookController extends Controller
         // $totalPriceThisMonth = $totalPrices[$now->format('Y-m')];
         $accountbooks = $accountbookQuery->get();
 
-        return view('accountbook.index', compact('totalPriceThisMonth', 'accountbooks', 'now'));
+        return view('accountbook.index', compact('totalPriceThisMonth', 'accountbooks'));
     }
 
     public function amountCategory(Request $request)
@@ -130,7 +130,7 @@ class AccountbookController extends Controller
         $results = $amountTagList->get();
         $results = $accountbookByTag->get();
 
-        return view('accountbook.amountTag', compact('accountbookByTag', 'results', 'accountbooks', 'accountbooks', 'accountbookPrice'));
+        return view('accountbook.amountTag', compact('accountbookByTag', 'results', 'accountbookPrice'));
     }
 
     public function eachYear()
@@ -164,7 +164,7 @@ class AccountbookController extends Controller
         $accountbook->save();
         $accountbook->tags()->attach($request->tags);
 
-        return redirect('accountbook/home');
+        return redirect('accountbook');
     }
 
     public function edit(Request $request)
@@ -185,7 +185,7 @@ class AccountbookController extends Controller
         $accountbook->fill($accountbook_form)->save();
         $accountbook->tags()->sync($request->tags);
 
-        return redirect('accountbook/home');
+        return redirect('accountbook');
     }
 
     public function delete(Request $request)
@@ -193,6 +193,6 @@ class AccountbookController extends Controller
         $accountbook = Accountbook::find($request->id);
         $accountbook->delete();
 
-        return redirect('accountbook/home');
+        return redirect('accountbook');
     }
 }
