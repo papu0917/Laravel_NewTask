@@ -150,11 +150,13 @@ class AccountbookController extends Controller
     public function add()
     {
         $user = Auth::user();
-        $accountbookByTags = Accountbook::where('user_id', $user->id);
-        $accountbookByTags = Tag::all();
-        $categories = Category::all();
+        $accountbookByTags = Tag::where('user_id', $user->id);
+        $tags = $accountbookByTags->get();
+        $categorie = Category::where('user_id', $user->id);
+        $categories = $categorie->get();
 
-        return view('accountbook.create', compact('categories', 'accountbookByTags'));
+
+        return view('accountbook.create', compact('categories', 'tags'));
     }
 
     public function create(Request $request)

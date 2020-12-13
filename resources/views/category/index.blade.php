@@ -15,7 +15,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $category)
+                            @foreach ($results as $category)
                                 <tr>
                                     <th>{{ $category->id }}</th>
                                     <th>{{ $category->name }}</th>

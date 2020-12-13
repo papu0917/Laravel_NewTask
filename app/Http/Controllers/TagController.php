@@ -10,9 +10,11 @@ class TagController extends Controller
 {
     public function index(Request $request)
     {
-        $tags = Tag::all();
+        $user = Auth::user();
+        $tags = Tag::where('user_id', $user->id);
+        $results = $tags->get();
 
-        return view('tag.index', compact('tags'));
+        return view('tag.index', compact('results'));
     }
 
     public function add()
@@ -22,12 +24,12 @@ class TagController extends Controller
 
     public function create(Request $request)
     {
-        $tag = new Tag;
+        $tags = new Tag;
         $form = $request->all();
         unset($form['_token']);
-        $tag->fill($form);
-        // $tag->user_id = Auth::id();
-        $tag->save();
+        $tags->fill($form);
+        $tags->user_id = Auth::id();
+        $tags->save();
 
         return redirect('tag/index');
     }

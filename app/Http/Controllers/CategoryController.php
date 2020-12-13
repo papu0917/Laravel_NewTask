@@ -11,12 +11,11 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        // $user = Auth::user();
-        // $categories = Accountbook::where('user_id', $user->id);
-        // $categories = Category::where('name', $request->name);
-        $categories = Category::all();
+        $user = Auth::user();
+        $categories = Category::where('user_id', $user->id);
+        $results = $categories->get();
 
-        return view('category.index', compact('categories'));
+        return view('category.index', compact('results'));
     }
 
     public function add()
@@ -30,7 +29,7 @@ class CategoryController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $category->fill($form);
-        // $category->category_id = Auth::id();
+        $category->user_id = Auth::id();
         $category->save();
 
         return redirect('category/index');

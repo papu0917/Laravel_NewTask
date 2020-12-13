@@ -10,6 +10,7 @@ class Category extends Model
 
     public static $rules = array(
         'name' => 'required',
+        'user_id' => 'required',
     );
 
     public function accountbooks()

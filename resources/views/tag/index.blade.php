@@ -15,7 +15,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tags as $tag)
+                            @foreach ($results as $tag)
                                 <tr>
                                     <th>{{ $tag->id }}</th>
                                     <th>{{ $tag->name }}</th>

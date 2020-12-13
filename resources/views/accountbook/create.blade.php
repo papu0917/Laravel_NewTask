@@ -43,7 +43,7 @@
                     <div class="form-group row">
                         <label class="col-md-2">タグ</label>
                         <div class="col-md-10">
-                            @foreach ($accountbookByTags as $tag)
+                            @foreach ($tags as $tag)
                                 <input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->name }}
                             @endforeach
                         </div>
