@@ -11,10 +11,9 @@ class TagController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $tags = Tag::where('user_id', $user->id);
-        $results = $tags->get();
+        $tags = Tag::where('user_id', $user->id)->get();
 
-        return view('tag.index', compact('results'));
+        return view('tag.index', compact('tags'));
     }
 
     public function add()

@@ -151,9 +151,9 @@ class AccountbookController extends Controller
     {
         $user = Auth::user();
         $accountbookByTags = Tag::where('user_id', $user->id);
-        $tags = $accountbookByTags->get('tags.name', $user->id);
+        $tags = $accountbookByTags->get();
         $categorie = Category::where('user_id', $user->id);
-        $categories = $categorie->get('categories.name', $user->id);
+        $categories = $categorie->get();
 
 
         return view('accountbook.create', compact('categories', 'tags'));

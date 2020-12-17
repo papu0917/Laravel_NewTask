@@ -12,10 +12,9 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $categories = Category::where('user_id', $user->id);
-        $results = $categories->get();
+        $categories = Category::where('user_id', $user->id)->get();
 
-        return view('category.index', compact('results'));
+        return view('category.index', compact('categories'));
     }
 
     public function add()
