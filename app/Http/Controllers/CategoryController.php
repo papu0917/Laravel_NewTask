@@ -24,6 +24,7 @@ class CategoryController extends Controller
 
     public function create(Request $request)
     {
+        $this->validate($request, Category::$rules);
         $category = new Category;
         $form = $request->all();
         unset($form['_token']);

@@ -153,12 +153,12 @@ class AccountbookController extends Controller
         $accountbookByTags = Tag::where('user_id', $user->id)->get();
         $categories = Category::where('user_id', $user->id)->get();
 
-
         return view('accountbook.create', compact('categories', 'accountbookByTags'));
     }
 
     public function create(Request $request)
     {
+        $this->validate($request, Accountbook::$rules);
         $accountbook = new Accountbook;
         $form = $request->all();
         unset($form['_token']);

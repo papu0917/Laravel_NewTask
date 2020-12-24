@@ -9,8 +9,7 @@ class Category extends Model
     protected $guarded = array('id');
 
     public static $rules = array(
-        'name' => 'required',
-        'user_id' => 'required',
+        'name' => 'required'
     );
 
     public function accountbooks()

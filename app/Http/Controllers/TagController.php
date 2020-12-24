@@ -23,6 +23,7 @@ class TagController extends Controller
 
     public function create(Request $request)
     {
+        $this->validate($request, Tag::$rules);
         $tags = new Tag;
         $form = $request->all();
         unset($form['_token']);

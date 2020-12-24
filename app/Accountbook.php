@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Accountbook extends Model
 {
+    public static $rules = array(
+        'price' => 'required',
+        'category_id' => 'required',
+        'purchase_date' => 'required',
+        'title' => 'required'
+    );
+
     protected $fillable = [
         'user_id', 'title', 'price', 'id', 'purchase_date', 'category_id', 'tag_id',
     ];

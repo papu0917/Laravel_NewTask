@@ -9,6 +9,14 @@
 
             </script>
         </div>
+
+        @if (count($errors) > 0)
+            <ul>
+                @foreach ($errors->all() as $e)
+                    <li>{{ $e }}</li>
+                @endforeach
+            </ul>
+        @endif
         <div class="row">
             <div class="col-lg-9">
                 <table class="table-striped">
